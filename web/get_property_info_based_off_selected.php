@@ -2,10 +2,11 @@
 
 //include 'db_connect.php';
 //
-$server = "localhost";
-$username = "test1";
-$password = "test";
-$db = "claDB";
+$servername = "localhost";
+$username = "root";
+$password = "password";
+
+$db = "data";
 
 $conn = new mysqli($server, $username, $password, $db);
 

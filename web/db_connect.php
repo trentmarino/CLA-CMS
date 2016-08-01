@@ -8,11 +8,11 @@
 //$conn = new mysqli($server, $username, $password, $db);
 
 $servername = "localhost";
-$username = "test1";
-$password = "test";
+$username = "root";
+$password = "password";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=claDB", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=data", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
