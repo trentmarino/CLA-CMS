@@ -1,14 +1,8 @@
 <?php
 
-//include 'db_connect.php';
-//
-$servername = "localhost";
-$username = "root";
-$password = "password";
+include 'db_connect.php';
 
-$db = "data";
 
-$conn = new mysqli($server, $username, $password, $db);
 $response = array();
 $sql = " SELECT * FROM `page_content`";
 

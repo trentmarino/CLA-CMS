@@ -1,18 +1,12 @@
 <?php
-//
-//$server = "localhost";
-//$username = "test1";
-//$password = "test";
-//$db = "claDB";
-//
-//$conn = new mysqli($server, $username, $password, $db);
+
 
 $servername = "localhost";
-$username = "root";
-$password = "password";
+$username = "forge";
+$password = "CHjR2SjRWCjG978mJMl5";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=data", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=forge", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }

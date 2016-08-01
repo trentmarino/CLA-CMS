@@ -1,16 +1,9 @@
 <?php
-//include 'db_connect.php';
-//
-$servername = "localhost";
-$username = "root";
-$password = "password";
+include 'db_connect.php';
 
-$db = "data";
 
-$conn = new mysqli($server, $username, $password, $db);
-//$url = parse_url(getenv("mysql://b9b98665377990:b375b17e@us-cdbr-iron-east-03.cleardb.net/heroku_0b5ab614720338a?reconnect=true"));
-//
-//$conn = new mysqli($server, $username, $password, $db);
+
+
 $response = array();
 $sql = "SELECT * FROM property WHERE deleted = 0";
 $result = $conn->query($sql);
