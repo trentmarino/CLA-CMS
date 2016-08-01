@@ -1,6 +1,8 @@
 <?php
 
 include "db_connect.php";
+include 'db_connect_dev.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idproduct = $_POST["productid"];

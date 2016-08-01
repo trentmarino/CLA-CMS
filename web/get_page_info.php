@@ -1,6 +1,7 @@
 <?php
 
 include 'db_connect.php';
+include 'db_connect_dev.php';
 
 
 $response = array();
