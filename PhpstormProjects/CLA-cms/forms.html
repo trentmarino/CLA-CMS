@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <label> Heading</label>
+    <input id="head" type="text">
+    <label> Sub-Heading</label>
+    <input id="sub" type="text">
+    <input id="test" type="button">
+</form>
+<script>
+
+    var head = document.getElementById('head');
+    var sub = document.getElementById('sub');
+    var test = document.getElementById('test');
+
+
+    test.onclick = function(){
+        console.log(head.value);
+
+
+    }
+</script>
+</body>
+</html>
