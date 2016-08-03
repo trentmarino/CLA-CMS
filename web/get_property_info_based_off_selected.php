@@ -1,10 +1,6 @@
 <?php
 
-
 include 'enviroCheck.php';
-
-
-
 
 $response = array();
     $sql = "SELECT product.product_name , property.idproperty,product.idproduct, product.deposit_amount_min, product_images.image_url,

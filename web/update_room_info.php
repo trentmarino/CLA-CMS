@@ -2,7 +2,6 @@
 
 include 'enviroCheck.php';
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idproduct = $_POST["productid"];
     $product_name = $_POST["roomName"];

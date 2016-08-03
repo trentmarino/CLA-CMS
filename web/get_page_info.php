@@ -1,7 +1,6 @@
 <?php
-//include 'enviroCheck.php';
-include 'db_connect.php';
 
+include 'enviroCheck.php';
 
 $response = array();
 $sql = " SELECT * FROM `page_content`";

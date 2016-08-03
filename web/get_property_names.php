@@ -1,17 +1,5 @@
 <?php
-
-
-
-if (file_exists('db_connect_dev.php')) {
-    include 'db_connect_dev.php';
-} else if(!file_exists('db_connect_dev.php')){
-    include 'db_connect.php';
-    ?>
-    <script>console.log('sick juanz');</script>
-    <?php
-}
-
-
+include 'enviroCheck.php';
 
 $response = array();
 $sql = "SELECT * FROM property WHERE deleted = 0";
