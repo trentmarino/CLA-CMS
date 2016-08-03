@@ -1,6 +1,5 @@
 <?php
-include "db_connect.php";
-//include 'db_connect_dev.php';
+include 'enviroCheck.php';
 
 $productsJSON = $_POST['page'];
 $productsArr = json_decode($productsJSON);

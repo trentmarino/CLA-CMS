@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+ #!/usr/bin/env bash
 
 # Use single quotes instead of double quotes to make it work with special-character passwords
 PASSWORD='password'
