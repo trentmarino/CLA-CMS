@@ -3,7 +3,7 @@
 
 $server = "localhost";
 $username = "forge";
-$password = "JAAvMz4RhIyLAocRwTUP";
+$password = "5agHFeE5eiuOFnXIy1fb";
 $db = "forge";
 
 ?>
