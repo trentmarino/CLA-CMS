@@ -1,6 +1,6 @@
 <?php
 
-include 'db_connect.php';
+include 'envronment_test.php';
 
 
 $response = array();
