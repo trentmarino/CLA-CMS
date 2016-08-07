@@ -1,7 +1,9 @@
 <?php
 include "envronment_test.php";
-$productID = 1;
-$sql = " SELECT * FROM `page_content` WHERE idproduct =".$productID ;
+$productID = $_GET['name'];
+$sql = " SELECT * FROM `page_content` WHERE idproduct =".$productID;
+
+$result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $response["page"] = array();
@@ -14,6 +16,7 @@ if ($result->num_rows > 0) {
         $page["content_order"] = $row["content_order"];
         array_push($response["page"], $page);
     }
+//    echo json_encode($response);
     print(json_encode($response));
 }
 $conn->close();
