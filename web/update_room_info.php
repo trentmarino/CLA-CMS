@@ -1,6 +1,6 @@
 <?php
 
-include "db_connect.php";
+include "envronment_test.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idproduct = $_POST["productid"];

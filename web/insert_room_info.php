@@ -1,5 +1,5 @@
 <?php
-include "db_connect.php";
+include "envronment_test.php";
 
 $productsJSON = $_POST['page'];
 $productsArr = json_decode($productsJSON);
