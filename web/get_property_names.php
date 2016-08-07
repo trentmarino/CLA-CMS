@@ -1,5 +1,6 @@
 <?php
-include 'enviroCheck.php';
+include 'db_connect.php';
+
 
 $response = array();
 $sql = "SELECT * FROM property WHERE deleted = 0";

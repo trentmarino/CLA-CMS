@@ -1,6 +1,6 @@
 <?php
 
-include 'enviroCheck.php';
+include "db_connect.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idproduct = $_POST["productid"];
@@ -16,9 +16,6 @@ $sql = "UPDATE `product` SET `max_pax`='.$max_pax.', `product_name`='".$product_
 deposit_amount_min='".$deposit_amount_min."',deposit_amount_max ='".$deposit_amount_max."'
 WHERE `idproduct`= $idproduct";
 
-
-//$sql = "UPDATE product SET product_name ='{$product_name}', deposit_amount_min = '{$min_rate}',
-//deposit_amount_max = '{$max_rate}', max_pax = '{$noGuests}' WHERE idproduct = '{$idproduct}'" ;
 
 
 if ($conn->query($sql) === TRUE) {

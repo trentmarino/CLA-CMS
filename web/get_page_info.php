@@ -1,6 +1,7 @@
 <?php
 
-include 'enviroCheck.php';
+include 'db_connect.php';
+
 
 $response = array();
 $sql = " SELECT * FROM `page_content`";
@@ -17,7 +18,6 @@ if ($result->num_rows > 0) {
         $page["Info_type"] = $row["Info_type"];
         $page["content"] = $row["content"];
         $page["content_order"] = $row["content_order"];
-        
         array_push($response["page"], $page);
     }
     print(json_encode($response));

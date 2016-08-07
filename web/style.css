@@ -147,17 +147,6 @@ input {
     visibility: hidden;
 }
 
-.cmsTextFields{
-float: right;
-}
-
-.formDropdowns{
-    margin-left: 8.5%;
-}
-
-#preview{
-    margin-bottom: 1%;
-}
 
 
 .formDropdowns {
@@ -173,13 +162,6 @@ float: right;
 
 }
 
-#sideBar{
-    padding-left: 10%;
-}
-
-#dropdown {
-    float: right;
-}
 #sideBar {
     padding-left: 10%;
 }
@@ -219,5 +201,4 @@ float: left;
 
 #beenUpdated{
     visibility: hidden;
->>>>>>> test
 }

@@ -34,12 +34,8 @@
   ],
   "require": {
     "php": ">=5.5",
-    "composer/installers": "~1.0.12",
-    "vlucas/phpdotenv": "^2.0.1",
-    "johnpbloch/wordpress": "4.5.3",
-    "oscarotero/env": "^1.0",
-    "roots/wp-password-bcrypt": "1.0.0"
-  },
+    "vlucas/phpdotenv": "^2.3"},
+
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
   },

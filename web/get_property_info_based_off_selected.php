@@ -1,6 +1,7 @@
 <?php
 
-include 'enviroCheck.php';
+include 'db_connect.php';
+
 
 $response = array();
     $sql = "SELECT product.product_name , property.idproperty,product.idproduct, product.deposit_amount_min, product_images.image_url,
@@ -10,7 +11,7 @@ $response = array();
             ON property.idproperty=product.idproperty
             INNER JOIN product_images
             ON product.`idproduct` = `product_images`.`productid`
-            WHERE product.deleted = 0 AND product_images.is_thumb = 1";
+            WHERE product.deleted = 0 AND product_images.is_thumb = 1" ;
 
 
     $result = $conn->query($sql);

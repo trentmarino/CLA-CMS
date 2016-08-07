@@ -15,6 +15,11 @@
 </head>
 <body>
 <?php
+//require __DIR__ . '../vendor/autoload.php';
+//$dotenv = new Dotenv\Dotenv(__DIR__);
+//$dotenv->load();
+
+
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -43,10 +48,6 @@
            
         </div>
     </div>
-
-    <div id="container">
-        <div class="starter-template">
-            <h1>Room information</h1>
     <div class="col updateForm" id="container">
         <h1>Room information</h1>
         
@@ -56,24 +57,16 @@
                 </label>
                 <select class="property">
                 </select>
-                <br>
                 <label id="roomLabel">
                     Room:
                 </label>
                 <select class="room">
                 </select>
-                <br>
                 <button id="editval" type="button" class="btn btn-default btn-sm">
                     Edit
                     <span class="glyphicon glyphicon-cog"></span>
                 </button>
             </form>
-            <form action="update_room_info.php" method="post">
-                <ul id="form">
-                    <li><label>
-                            Room name:
-                        </label>
-                        <input class="cmsTextFields" id="roomName" name="roomName" type="text">
             <form id="newInfo" action="update_room_info.php" method="post">
                 <ul id="form" class="form">
                     <li><label>Room name:</label>
