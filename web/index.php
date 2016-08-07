@@ -15,7 +15,7 @@
 </head>
 <body>
 <?php
-include 'db_connect.php';
+include 'envronment_test.php';
 
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
