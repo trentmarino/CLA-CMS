@@ -10,11 +10,12 @@
     var commit = document.getElementById("commit");
     var preview = document.getElementById("preview");
     var page = document.getElementById("description");
+    var optionChanged = false;
     var count = 0;
+    var pageLoaded = false;
     var contentType;
     var product;
     var ArrayInformation = [];
-    var content;
     var colour = "red";
     var hasBeenChanged;
     var currentOrder;
@@ -23,10 +24,49 @@
 
 
     var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours", "Rates", "Footer"];
+    var contentTypes = {
+        1: 'Heading',
+        2: 'Sub-Heading',
+        3: 'Image',
+        4: 'Tours',
+        5: 'Rates',
+        6: 'Footer'
+    };
     addBlock.onclick = function () {
         createBlock();
         ArrayInformation.push("");
     };
+
+    function loadPage(product) {
+        $.getJSON("existing_content.php", {name: product}, function (result) {
+            $.each(result, function (index, field) {
+                console.log(field);
+                if(field !== null) {
+                    updateBlock(field, index);
+                }else{
+                    createBlock();
+                }
+            });
+        });
+    }
+
+    function updateBlock(field) {
+        console.log(field);
+        $.each(field, function (key, content) {
+            var block = document.createElement("div");
+            var index = count;
+            block.setAttribute('class', "itemBlock");
+            block.setAttribute('data', index.toString());
+            block.style.marginLeft = "10%";
+            block.style.marginBottom = "2%";
+            console.log(key);
+            console.log(content);
+            container.appendChild(block);
+            currentArray.push(index);
+            updatedBlocks(content.Info_type, block, index, content.content);
+            count++;
+        });
+    }
 
     function createBlock() {
         var index = count;
@@ -68,7 +108,6 @@
         count++;
     }
 
-
     $('#removeBlock').click(function () {
         $('.itemBlock').last().remove();
         count--;
@@ -107,38 +146,77 @@
         }
     });
 
-
-    function blockType(type, block, count, index) {
+    function blockType(type, block, count, index, content) {
 
         console.log(JSON.stringify(index));
         if (currentArray[index] != index) {
             index = currentArray.indexOf(index);
         }
-        if (type.value === "Heading") {
-            HeadingObject(block, index);
-        } else if (type.value === "Sub-Heading") {
-            SubHeadingObject(block, index);
-        } else if (type.value === "Paragraph") {
-            ParaObject(block, index);
-        } else if (type.value === "Image") {
-            ImageObject(block, index);
-        } else if (type.value === "Tours") {
-            TourObject(block, index);
+        if (type.value === "Heading" || type === 1) {
+            HeadingObject(block, index, content);
+        } else if (type.value === "Sub-Heading" || type === 2) {
+            SubHeadingObject(block, index, content);
+        } else if (type.value === "Paragraph" || type === 3) {
+            ParaObject(block, index, content);
+        } else if (type.value === "Image" || type === 4) {
+            ImageObject(block, index, content);
+        } else if (type.value === "Tours" || type === 5) {
+            TourObject(block, index, content);
 
-        } else if (type.value === "Rates") {
-            RateObject(block, index);
+        } else if (type.value === "Rates" || type === 6) {
+            RateObject(block, index, content);
 
-        } else if (type.value === "Footer") {
-            FooterObject(block, index);
+        } else if (type.value === "Footer" || 7) {
+            FooterObject(block, index, content);
+        }
+
+    }
+
+
+    function updatedBlocks(type, block, index, content) {
+        console.log(type, block, content);
+        console.log(JSON.stringify(index));
+        if (currentArray[index] != index) {
+            index = currentArray.indexOf(index);
+        }
+        if (type === "Heading" || type == 1) {
+            HeadingObject(block, index, content);
+        } else if (type === "Sub-Heading" || type == 2) {
+            SubHeadingObject(block, index, content);
+        } else if (type === "Paragraph" || type == 3) {
+            ParaObject(block, index, content);
+        } else if (type === "Image" || type == 4) {
+            ImageObject(block, index, content);
+        } else if (type === "Tours" || type == 5) {
+            TourObject(block, index, content);
+
+        } else if (type === "Rates" || type == 6) {
+            RateObject(block, index, content);
+
+        } else if (type === "Footer" || type === 7) {
+            FooterObject(block, index, content);
         }
 
     }
 
 
     loader.onclick = function () {
+        if(product !== getProductID()){
+            console.log(product);
+            $('.itemBlock').remove();
+            pageLoaded = false;
+            product = getProductID();
+        }
         product = getProductID();
+        console.log(product);
+
         page.style.visibility = "visible";
+        if (pageLoaded === false){
+            pageLoaded = true;
+            loadPage(getProductID());
+        }
     };
+
     commit.onclick = function () {
         var productsJSON = JSON.stringify(ArrayInformation);
 
@@ -163,45 +241,17 @@
         // $("#result").html(jsonOBJ(ArrayInformation));
     };
 
-    function HeadingObject(block, index) {
-
-        // var headingDiv = document.createElement("div");
-        // var h1Heading = document.createElement("h1");
-        // var headingLabel = document.createElement("label");
-        // var headingField = document.createElement("input");
-        // var setButton = document.createElement("input");
-        //
-        // headingDiv.setAttribute('id',"headingDiv"+index);
-        //
-        // h1Heading.innerHTML = "Heading";
-        // headingLabel.innerHTML = "Heading";
-        //
-        // headingField.setAttribute('id',"head" + index );
-        // headingField.setAttribute('type',"text");
-        //
-        // setButton.setAttribute('type',"button");
-        // setButton.setAttribute('id',"set" + index);
-        // setButton.style.marginRight = 0;
-        // setButton.style.backgroundColor = "red";
-        // setButton.setAttribute('value',"Set Field");
-        //
-        // headingDiv.appendChild(h1Heading);
-        // headingDiv.appendChild(headingLabel);
-        // headingDiv.appendChild(headingField);
-        // headingDiv.appendChild(setButton);
-        // $("#dropdown" + index).click(function () {
-        //     $("#headingDiv"+index).toggle(function () {
-        //         block.appendChild(headingDiv);
-        //     });
-        // });
+    function HeadingObject(block, index, content) {
 
         block.innerHTML += '<h1> Heading </h1>' +
             '                 <label> Heading: </label>' +
             '<input id="head' + index + '" type="text">' +
             '<input type="button" id="set' + index + '" style="margin-right: 0; background-color: red" value="Set Field"> ';
-
-
         var headText = document.getElementById("head" + index);
+
+        if (content !== null) {
+            headText.value = content;
+        }
         var setField = document.getElementById("set" + index);
         setField.onclick = function () {
             colour = "green";
@@ -221,13 +271,16 @@
 
     }
 
-    function SubHeadingObject(block, index) {
+    function SubHeadingObject(block, index, content) {
         block.innerHTML += '<h1> Sub-Heading </h1>' +
             '                  <label> Sub-Heading: </label>' +
             '<input id="subhead' + index + '" type="text">' +
             '<input type="button" id="set' + index + '" style="margin-right: 0; background-color: red" value="Set Field"> ';
 
         var subText = document.getElementById("subhead" + index);
+        if (content !== null) {
+            subText.value = content
+        }
         var setField = document.getElementById("set" + index);
         setField.onclick = function () {
             colour = "green";
@@ -246,12 +299,15 @@
         };
     }
 
-    function ParaObject(block, index) {
+    function ParaObject(block, index, content) {
         block.innerHTML += '<h1> Paragraph </h1>' +
             '  <label> Paragraph</label>' +
             '<textarea id="paraField' + index + '" ></textarea>' +
             '<input type="button" id="set' + index + '" style="margin-right: 0; background-color: red" value="Set Field"> ';
         var pText = document.getElementById("paraField" + index);
+        if (content !== null) {
+            pText.value = content
+        }
         var setField = document.getElementById("set" + index);
         setField.onclick = function () {
             colour = "green";
@@ -269,7 +325,7 @@
         };
     }
 
-    function ImageObject(block, index) {
+    function ImageObject(block, index, content) {
         block.innerHTML += '<h1> Image Upload </h1>' +
             '<label> Image</label>' +
             '<input id="fileupload' + index + '" type="file" name="files[]" data-url="server/php/" multiple> ' +
@@ -285,7 +341,11 @@
             done: function (e, data) {
                 $.each(data.result.files, function (index1, file) {
                     var imageElement = document.createElement("img");
-                    imageElement.setAttribute('src', "server/php/files/" + file.name);
+                    if (content !== null) {
+                        imageElement.setAttribute('src', content);
+                    } else {
+                        imageElement.setAttribute('src', "server/php/files/" + file.name);
+                    }
                     imageElement.setAttribute('width', "100%");
                     imageElement.setAttribute('height', "75%");
                     if (imageCount === 1) {
@@ -306,7 +366,7 @@
             colour = "green";
             setField.style.backgroundColor = colour;
             console.log("product id is " + product);
-            ArrayInformation[index] = jsonBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/"+image.name, currentArray[index]);
+            ArrayInformation[index] = jsonBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/" + image.name, currentArray[index]);
         };
 
         // image.onclick = function () {
@@ -346,13 +406,13 @@
         // };
     }
 
-    function RateObject(block, index) {
-
-    }
-
-    function FooterObject(block, index) {
-
-    }
+    // function RateObject(block, index) {
+    //
+    // }
+    //
+    // function FooterObject(block, index) {
+    //
+    // }
 
     function jsonBuilder(type, product, data, order) {
         var pageOject = {
@@ -361,7 +421,6 @@
             content: data,
             content_order: order
         };
-        //var object = '{"type":"' + type + '","idproduct":"' + product + '",' + '"content":"' + data + '",' + '"content_order":"' + order + '"}';
         return pageOject;
         // return object;
     }
@@ -372,6 +431,4 @@
         pageinfo += ']}';
         return pageinfo;
     }
-
-
 })();
