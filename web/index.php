@@ -15,10 +15,7 @@
 </head>
 <body>
 <?php
-//require __DIR__ . '../vendor/autoload.php';
-//$dotenv = new Dotenv\Dotenv(__DIR__);
-//$dotenv->load();
-
+include 'db_connect.php';
 
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">

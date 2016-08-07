@@ -34,8 +34,8 @@
   ],
   "require": {
     "php": ">=5.5",
-    "vlucas/phpdotenv": "^2.3"},
-
+    "josegonzalez/dotenv": "dev-master"
+  },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
   },

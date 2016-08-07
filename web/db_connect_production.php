@@ -1,15 +1,11 @@
 <?php
 
-
 $server = "localhost";
-$username = "root";
-$password = "password";
-$db = "data";
+$username = "forge";
+$password = "vmoF2azGMzhDFNMacMCD";
+$db = "forge";
 
 $conn = new mysqli($server, $username, $password, $db);
-
-
-
 
 
 
