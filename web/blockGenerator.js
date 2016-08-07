@@ -24,14 +24,7 @@
 
 
     var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours", "Rates", "Footer"];
-    var contentTypes = {
-        1: 'Heading',
-        2: 'Sub-Heading',
-        3: 'Image',
-        4: 'Tours',
-        5: 'Rates',
-        6: 'Footer'
-    };
+
     addBlock.onclick = function () {
         createBlock();
         ArrayInformation.push("");
@@ -204,6 +197,7 @@
         if(product !== getProductID()){
             console.log(product);
             $('.itemBlock').remove();
+            ArrayInformation = [];
             pageLoaded = false;
             product = getProductID();
         }
