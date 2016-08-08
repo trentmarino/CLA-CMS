@@ -33,6 +33,7 @@
     function loadPage(product) {
         $.getJSON("existing_content.php", {name: product}, function (result) {
             $.each(result, function (index, field) {
+                console.log(ArrayInformation);
                 console.log(field);
                 if(field !== null) {
                     updateBlock(field, index);
@@ -140,56 +141,62 @@
     });
 
     function blockType(type, block, count, index, content) {
-
-        console.log(JSON.stringify(index));
         if (currentArray[index] != index) {
             index = currentArray.indexOf(index);
         }
-        if (type.value === "Heading" || type === 1) {
-            HeadingObject(block, index, content);
-        } else if (type.value === "Sub-Heading" || type === 2) {
-            SubHeadingObject(block, index, content);
-        } else if (type.value === "Paragraph" || type === 3) {
-            ParaObject(block, index, content);
-        } else if (type.value === "Image" || type === 4) {
-            ImageObject(block, index, content);
-        } else if (type.value === "Tours" || type === 5) {
-            TourObject(block, index, content);
-
-        } else if (type.value === "Rates" || type === 6) {
-            RateObject(block, index, content);
-
-        } else if (type.value === "Footer" || 7) {
-            FooterObject(block, index, content);
+        switch (type.value) {
+            case "Heading":
+                HeadingObject(block, index, content);
+                break;
+            case "Sub-Heading":
+                SubHeadingObject(block, index, content);
+                break;
+            case "Paragraph":
+                ParaObject(block, index, content);
+                break;
+            case "Image":
+                ImageObject(block, index, content);
+                break;
+            case "Tours":
+                TourObject(block, index, content);
+                break;
+            case "Rates":
+                RateObject(block, index, content);
+                break;
+            case "Footer":
+                FooterObject(block, index, content);
+                break;
         }
-
     }
 
 
     function updatedBlocks(type, block, index, content) {
-        console.log(type, block, content);
-        console.log(JSON.stringify(index));
         if (currentArray[index] != index) {
             index = currentArray.indexOf(index);
         }
-        if (type === "Heading" || type == 1) {
-            HeadingObject(block, index, content);
-        } else if (type === "Sub-Heading" || type == 2) {
-            SubHeadingObject(block, index, content);
-        } else if (type === "Paragraph" || type == 3) {
-            ParaObject(block, index, content);
-        } else if (type === "Image" || type == 4) {
-            ImageObject(block, index, content);
-        } else if (type === "Tours" || type == 5) {
-            TourObject(block, index, content);
-
-        } else if (type === "Rates" || type == 6) {
-            RateObject(block, index, content);
-
-        } else if (type === "Footer" || type === 7) {
-            FooterObject(block, index, content);
+        switch (true) {
+            case type == 1:
+                HeadingObject(block, index, content);
+                break;
+            case type == 2:
+                SubHeadingObject(block, index, content);
+                break;
+            case type == 3:
+                ParaObject(block, index, content);
+                break;
+            case type == 4:
+                ImageObject(block, index, content);
+                break;
+            case type == 5:
+                TourObject(block, index, content);
+                break;
+            case type == 6:
+                RateObject(block, index, content);
+                break;
+            case type == 7:
+                FooterObject(block, index, content);
+                break;
         }
-
     }
 
 
@@ -200,6 +207,7 @@
             ArrayInformation = [];
             pageLoaded = false;
             product = getProductID();
+            count = 0;
         }
         product = getProductID();
         console.log(product);

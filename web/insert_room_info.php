@@ -1,25 +1,43 @@
 <?php
 include "envronment_test.php";
 
+//$productsJSON = $_POST['page'];
+//$productsArr = json_decode($productsJSON);
+//$result_set = $conn->prepare("INSERT INTO page_content (idproduct, info_type, content, content_order)
+//    VALUES (:idproduct, :info_type, :content, :content_order)");
+//
+//$valuesArr = array();
+//foreach($productsArr  as $product){
+//    $result_set->execute(array(
+//        ':idproduct' => $product->productid,
+//        ':info_type' => $product->type,
+//        ':content' => $product->content,
+//        ':content_order' => $product->content_order
+//    ));
+//
+//}
+//$conn = null;;
+
+
 $productsJSON = $_POST['page'];
-$productsArr = json_decode($productsJSON);
-$result_set = $conn->prepare("INSERT INTO page_content (idproduct, info_type, content, content_order)
-    VALUES (:idproduct, :info_type, :content, :content_order)");
+$productsArr = json_decode(stripslashes($productsJSON));
+$sql = "INSERT INTO page_content (idproduct, info_type, content, content_order)
+    VALUES";
 
 $valuesArr = array();
 foreach($productsArr  as $product){
-    $result_set->execute(array(
-        ':idproduct' => $product->productid,
-        ':info_type' => $product->type,
-        ':content' => $product->content,
-        ':content_order' => $product->content_order
-    ));
-
+    $type = $product->type;
+    $idProduct =$product->productid;
+    $content = $product->content;
+    $contentOrder = $product->content_order;
+    $valuesArr[] = "('$idProduct', '$type', '$content','$contentOrder')";
 }
-$conn = null;;
-
-
-
+$sql .= implode(',', $valuesArr);
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
 
 
