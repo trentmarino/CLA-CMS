@@ -5,7 +5,7 @@
 
 
 $server = "localhost";
-$username = "root";
+$username = "root1";
 $password = "password";
 $db = "data";
 
