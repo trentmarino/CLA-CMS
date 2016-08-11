@@ -25,12 +25,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $creditcardNumber = $_POST['creditcardNumber'];
         $creditcardExpiry = $_POST['creditcardExpiry'];
         $creditcardCode = $_POST['creditcardCode'];
+        $lateCheckin = $_POST['lateCheckIn'];
 
         $sql = "INSERT INTO customers(name, email,phone,address,
         location,checkin,checkout,roomtype,numberOfGuests,pricePaid,
-        creditcardNumber,creditcardExpiry,creditcardCode)
+        creditcardNumber,creditcardExpiry,creditcardCode, lateCheckIn)
         VALUES ('$name','$email','$phone', '$address','$location','$checkin','$checkout',
-        '$roomtype','$numberOfGuests','$pricePaid','$creditcardNumber','$creditcardExpiry',$creditcardCode) ";
+        '$roomtype','$numberOfGuests','$pricePaid','$creditcardNumber','$creditcardExpiry',$creditcardCode, $lateCheckin) ";
         echo $sql;
         if ($conn->query($sql) === TRUE) {
             echo $sql;
@@ -42,3 +43,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
 
 }
+
+
