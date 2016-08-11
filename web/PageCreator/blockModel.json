@@ -1,0 +1,20 @@
+{
+  "Blocktype": {
+    "Head": {
+      "title": "Heading",
+      "InputType": "input"
+    },
+    "SubHead": {
+      "title": "SubHeading",
+      "InputType": "input"
+    },
+    "Para": {
+      "title": "Paragraph",
+      "InputType": "textarea"
+    },
+    "Image": {
+      "title": "Image Upload",
+      "InputType": "file"
+    }
+  }
+}

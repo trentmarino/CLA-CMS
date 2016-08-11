@@ -21,6 +21,7 @@
     var currentOrder;
     var currentArray = [];
     var expandState = 0;
+    var blockID;
 
 
     var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours", "Rates", "Footer"];
@@ -33,12 +34,9 @@
     function loadPage(product) {
         $.getJSON("existing_content.php", {name: product}, function (result) {
             $.each(result, function (index, field) {
-                console.log(ArrayInformation);
                 console.log(field);
                 if(field !== null) {
                     updateBlock(field, index);
-                }else{
-                    createBlock();
                 }
             });
         });
@@ -57,11 +55,12 @@
             console.log(content);
             container.appendChild(block);
             currentArray.push(index);
-            updatedBlocks(content.Info_type, block, index, content.content);
+            console.log(content.idcontent);
+            updatedBlocks(content.Info_type, block, index, content.content,content.idcontent);
             count++;
         });
     }
-
+    
     function createBlock() {
         var index = count;
         var block = document.createElement("div");
@@ -141,62 +140,56 @@
     });
 
     function blockType(type, block, count, index, content) {
+
+        console.log(JSON.stringify(index));
         if (currentArray[index] != index) {
             index = currentArray.indexOf(index);
         }
-        switch (type.value) {
-            case "Heading":
-                HeadingObject(block, index, content);
-                break;
-            case "Sub-Heading":
-                SubHeadingObject(block, index, content);
-                break;
-            case "Paragraph":
-                ParaObject(block, index, content);
-                break;
-            case "Image":
-                ImageObject(block, index, content);
-                break;
-            case "Tours":
-                TourObject(block, index, content);
-                break;
-            case "Rates":
-                RateObject(block, index, content);
-                break;
-            case "Footer":
-                FooterObject(block, index, content);
-                break;
+        if (type.value === "Heading" || type === 1) {
+            HeadingObject(block, index, content);
+        } else if (type.value === "Sub-Heading" || type === 2) {
+            SubHeadingObject(block, index, content);
+        } else if (type.value === "Paragraph" || type === 3) {
+            ParaObject(block, index, content);
+        } else if (type.value === "Image" || type === 4) {
+            ImageObject(block, index, content);
+        } else if (type.value === "Tours" || type === 5) {
+            TourObject(block, index, content);
+
+        } else if (type.value === "Rates" || type === 6) {
+            RateObject(block, index, content);
+
+        } else if (type.value === "Footer" || 7) {
+            FooterObject(block, index, content);
         }
+
     }
 
 
-    function updatedBlocks(type, block, index, content) {
+    function updatedBlocks(type, block, index, content, contentid) {
+        console.log(type, block, content);
+        console.log(JSON.stringify(index));
         if (currentArray[index] != index) {
             index = currentArray.indexOf(index);
         }
-        switch (true) {
-            case type == 1:
-                HeadingObject(block, index, content);
-                break;
-            case type == 2:
-                SubHeadingObject(block, index, content);
-                break;
-            case type == 3:
-                ParaObject(block, index, content);
-                break;
-            case type == 4:
-                ImageObject(block, index, content);
-                break;
-            case type == 5:
-                TourObject(block, index, content);
-                break;
-            case type == 6:
-                RateObject(block, index, content);
-                break;
-            case type == 7:
-                FooterObject(block, index, content);
-                break;
+        if (type === "Heading" || type == 1) {
+            HeadingObject(block, index, content, contentid)
+        } else if (type === "Sub-Heading" || type == 2) {
+            SubHeadingObject(block, index, content, contentid);
+        } else if (type === "Paragraph" || type == 3) {
+            ParaObject(block, index, content, contentid);
+        } else if (type === "Image" || type == 4) {
+            ImageObject(block, index, content, contentid);
+        } else if (type === "Tours" || type == 5) {
+            TourObject(block, index, content, contentid);
+
+        } else if (type === "Rates" || type == 6) {
+            RateObject(block, index, content, contentid);
+
+        } else if (type === "Footer" || type === 7) {
+            FooterObject(block, index, content, contentid);
         }
+
     }
 
 
@@ -207,7 +200,6 @@
             ArrayInformation = [];
             pageLoaded = false;
             product = getProductID();
-            count = 0;
         }
         product = getProductID();
         console.log(product);
@@ -221,19 +213,33 @@
 
     commit.onclick = function () {
         var productsJSON = JSON.stringify(ArrayInformation);
+        console.log(blockID);
+        console.log(productsJSON);
+        if (pageLoaded === true) {
+            $.ajax({
+                url: 'update_room_content.php',
+                type: 'post',
+                data: {"page": productsJSON},
+                success: function (data) {
+                    console.log("Success");
+                    $("#status").html(data).css("visibility", "visible");
+                    $("#status-Block").css("visibility", "visible");
+                }
 
+            });
+        }else {
+            $.ajax({
+                url: 'insert_room_info.php',
+                type: 'post',
+                data: {"page": productsJSON},
+                success: function (data) {
+                    console.log("Success");
+                    $("#status").html(data).css("visibility", "visible");
+                    $("#status-Block").css("visibility", "visible");
+                }
 
-        $.ajax({
-            url: 'insert_room_info.php',
-            type: 'post',
-            data: {"page": productsJSON},
-            success: function (data) {
-                console.log("Success");
-                $("#status").html(data).css("visibility", "visible");
-                $("#status-Block").css("visibility", "visible");
-            }
-
-        });
+            });
+        }
         $("#result").val(productsJSON);
 
     };
@@ -243,10 +249,10 @@
         // $("#result").html(jsonOBJ(ArrayInformation));
     };
 
-    function HeadingObject(block, index, content) {
+    function HeadingObject(block, index, content, contentId) {
 
         block.innerHTML += '<h1> Heading </h1>' +
-            '                 <label> Heading: </label>' +
+            '<label> Heading: </label>' +
             '<input id="head' + index + '" type="text">' +
             '<input type="button" id="set' + index + '" style="margin-right: 0; background-color: red" value="Set Field"> ';
         var headText = document.getElementById("head" + index);
@@ -260,14 +266,18 @@
             setField.style.backgroundColor = colour;
             console.log("product id is " + product);
             console.log(currentArray[index]);
-            ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(1, product, headText.value, currentArray[index], contentId);
+            blockID = contentId;
+
 
         };
 
         headText.onkeyup = function () {
             console.log("product id is " + product);
             setField.style.backgroundColor = "green";
-            ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(1, product, headText.value, currentArray[index], contentId);
+            blockID = contentId;
+
         };
 
 
@@ -424,13 +434,17 @@
             content_order: order
         };
         return pageOject;
-        // return object;
     }
 
-    function jsonOBJ(content) {
-        var pageinfo = '{[';
-        pageinfo += content;
-        pageinfo += ']}';
-        return pageinfo;
+    function updateBuilder(type, product, data, order, contentID) {
+        var pageOject = {
+            type: type,
+            productid: product,
+            content: data,
+            content_order: order,
+            content_id: contentID
+        };
+        return pageOject;
     }
+
 })();

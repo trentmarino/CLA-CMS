@@ -119,7 +119,7 @@ include 'envronment_test.php';
 <!--    <span id="status">Test</span>-->
 </div>
 <div id="description">
-    <form method="post" id="roomPage">
+    <form method="post" id="roomPage" >
         <div id="sideBar">
             <button id="addBlock" type="button" class="btn btn-default btn-sm">
                 Add Block
@@ -137,6 +137,7 @@ include 'envronment_test.php';
                 Commit Changes
                 <span class="glyphicon glyphicon-ok"></span>
             </button>
+
         </div>
         <div id="blocks">
         </div>
@@ -146,7 +147,10 @@ include 'envronment_test.php';
 
 </div>
 <script src="pull_room_information.js"></script>
-<script src="blockGenerator.js"></script>
+<script src="./PageCreator/PageController.js"></script>
+<script src="./PageCreator/CreatePages.js"></script>
+<script src="./PageCreator/UpdatePages.js"></script>
+<script src="./PageCreator/PageElements.js"></script>
 <script src="android_preview.js"></script>
 
 </body>
