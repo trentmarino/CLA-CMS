@@ -36,6 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->query($sql) === TRUE) {
             echo $sql;
             echo "Record updated successfully";
+            include "email_builder.php";
         } else {
             echo "Error updating record: " . $conn->error;
         }

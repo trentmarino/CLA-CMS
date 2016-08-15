@@ -193,7 +193,7 @@ var updatePageElements = {
             console.log("product id is " + product);
             console.log(currentArray[index]);
             ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
-            blockID = contentId;
+            //blockID = contentId;
 
 
         };
@@ -202,7 +202,7 @@ var updatePageElements = {
             console.log("product id is " + product);
             setField.style.backgroundColor = "green";
             ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
-            blockID = contentId;
+            //blockID = contentId;
 
         };
 
