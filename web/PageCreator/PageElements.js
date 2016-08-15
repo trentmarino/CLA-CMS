@@ -21,8 +21,7 @@ var pageElements = {
         setField.style.backgroundColor = colour;
         console.log("product id is " + product);
         console.log(currentArray[index]);
-        ArrayInformation[index] = updateBuilder(1, product, headText.value, currentArray[index],contentid);
-        blockID = contentId;
+        ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
 
 
     };
@@ -30,8 +29,7 @@ var pageElements = {
     headText.onkeyup = function () {
         console.log("product id is " + product);
         setField.style.backgroundColor = "green";
-        ArrayInformation[index] = updateBuilder(1, product, headText.value, currentArray[index],contentid);
-        blockID = contentId;
+        ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
 
     };
 
@@ -54,14 +52,14 @@ var pageElements = {
         console.log("product id is " + product);
         console.log(currentArray[index]);
 
-        ArrayInformation[index] = updateBuilder(2, product, subText.value, currentArray[index], contentid);
+        ArrayInformation[index] = jsonBuilder(2, product, subText.value, currentArray[index]);
 
     };
 
     subText.onkeyup = function () {
         console.log("product id is " + product);
         setField.style.backgroundColor = "green";
-        ArrayInformation[index] = updateBuilder(2, product, subText.value, currentArray[index], contentid);
+        ArrayInformation[index] = jsonBuilder(2, product, subText.value, currentArray[index]);
     };
 },
     ParaObject: function (block, index, content,contentid) {
@@ -78,7 +76,7 @@ var pageElements = {
         colour = "green";
         setField.style.backgroundColor = colour;
         console.log("product id is " + product);
-        ArrayInformation[index] = updateBuilder(3, product, pText.value, currentArray[index],contentid);
+        ArrayInformation[index] = jsonBuilder(3, product, pText.value, currentArray[index]);
 
     };
 
@@ -86,7 +84,7 @@ var pageElements = {
         console.log("product id is " + product);
         setField.style.backgroundColor = "green";
 
-        ArrayInformation[index] = updateBuilder(3, product, pText.value, currentArray[index],contentid);
+        ArrayInformation[index] = jsonBuilder(3, product, pText.value, currentArray[index]);
     };
 },
     ImageObject: function (block, index, content,contentid) {
@@ -130,7 +128,7 @@ var pageElements = {
         colour = "green";
         setField.style.backgroundColor = colour;
         console.log("product id is " + product);
-        ArrayInformation[index] = updateBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/" + image.name, currentArray[index]),contentid;
+        ArrayInformation[index] = jsonBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/" + image.name, currentArray[index]);
     };
 
 },
@@ -192,7 +190,7 @@ var updatePageElements = {
             setField.style.backgroundColor = colour;
             console.log("product id is " + product);
             console.log(currentArray[index]);
-            ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(1, product, headText.value, currentArray[index],contentid);
             //blockID = contentId;
 
 
@@ -201,14 +199,14 @@ var updatePageElements = {
         headText.onkeyup = function () {
             console.log("product id is " + product);
             setField.style.backgroundColor = "green";
-            ArrayInformation[index] = jsonBuilder(1, product, headText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(1, product, headText.value, currentArray[index], contentid);
             //blockID = contentId;
 
         };
 
 
     },
-    SubHeadingObject: function (block, index, content) {
+    SubHeadingObject: function (block, index, content,contentid) {
         block.innerHTML += '<h1> Sub-Heading </h1>' +
             '                  <label> Sub-Heading: </label>' +
             '<input id="subhead' + index + '" type="text">' +
@@ -225,17 +223,17 @@ var updatePageElements = {
             console.log("product id is " + product);
             console.log(currentArray[index]);
 
-            ArrayInformation[index] = jsonBuilder(2, product, subText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(2, product, subText.value, currentArray[index],contentid);
 
         };
 
         subText.onkeyup = function () {
             console.log("product id is " + product);
             setField.style.backgroundColor = "green";
-            ArrayInformation[index] = jsonBuilder(2, product, subText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(2, product, subText.value, currentArray[index],contentid);
         };
     },
-    ParaObject: function (block, index, content) {
+    ParaObject: function (block, index, content, contentid) {
         block.innerHTML += '<h1> Paragraph </h1>' +
             '  <label> Paragraph</label>' +
             '<textarea id="paraField' + index + '" ></textarea>' +
@@ -249,7 +247,7 @@ var updatePageElements = {
             colour = "green";
             setField.style.backgroundColor = colour;
             console.log("product id is " + product);
-            ArrayInformation[index] = jsonBuilder(3, product, pText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(3, product, pText.value, currentArray[index],contentid);
 
         };
 
@@ -257,10 +255,10 @@ var updatePageElements = {
             console.log("product id is " + product);
             setField.style.backgroundColor = "green";
 
-            ArrayInformation[index] = jsonBuilder(3, product, pText.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(3, product, pText.value, currentArray[index],contentid);
         };
     },
-    ImageObject: function (block, index, content) {
+    ImageObject: function (block, index, content, contentid) {
         block.innerHTML += '<h1> Image Upload </h1>' +
             '<label> Image</label>' +
             '<input id="fileupload' + index + '" type="file" name="files[]" data-url="server/php/" multiple> ' +
@@ -301,7 +299,7 @@ var updatePageElements = {
             colour = "green";
             setField.style.backgroundColor = colour;
             console.log("product id is " + product);
-            ArrayInformation[index] = jsonBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/" + image.name, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/" + image.name, currentArray[index],contentid);
         };
 
         // image.onclick = function () {
@@ -312,7 +310,7 @@ var updatePageElements = {
         // };
 
     },
-    TourObject: function (block, index) {
+    TourObject: function (block, index, contentid) {
         block.innerHTML += '<h1> Tours </h1>' +
             '  <label> Tours</label>' +
             '<select id="tours' + index + '" >' +
@@ -328,7 +326,7 @@ var updatePageElements = {
             colour = "green";
             setField.style.backgroundColor = colour;
             console.log("product id is " + product);
-            ArrayInformation[index] = jsonBuilder(5, product, select.value, currentArray[index]);
+            ArrayInformation[index] = updateBuilder(5, product, select.value, currentArray[index],contentid);
 
         };
 
