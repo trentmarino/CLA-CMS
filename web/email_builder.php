@@ -29,12 +29,7 @@ require 'PHPMailer/PHPMailerAutoload.php';
                 $('#email').append(value.email);
 
                 console.log(key, value.name);
-
-
-    //location = value.location;
-//    checkin = value.checkin;
-//    checkout = value.checkout;
-//    roomtype = value.roomtype;
+                
     });
 
     }
