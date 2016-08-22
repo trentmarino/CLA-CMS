@@ -133,19 +133,22 @@ function businessEmail($email, $name, $phone, $address, $location,
 Name: <b>' . $name . '</b>
 </p>
 <p>
-Email:
+Email: <b>' . $email . '</b>
 </p>
 <p>
-Phone:
+Phone: <b>' . $phone . '</b>
 </p>
 <p>
-Address:
+Address: <b>' . $address . '</b>
 </p>
 <p>
 Check In: <b>' . $checkin . '</b>
 </p>
 <p>
 Check Out: <b>' . $checkout . '</b>
+</p>
+<p>
+Is Late Check In: <b>'.$lateCheckin. '</b>
 </p>
 <p>
 Room Type: <b>' . $roomtype . '</b>
@@ -157,7 +160,12 @@ Location: <b>' . $location . '</b>
 Number of Guests: <b>'.$numberOfGuests. '</b>
 </p>
 <p>
-Customer ID:
+Price Paid: <b>'.$pricePaid. '</b>
+</p><p>
+Credit Card Number: <b>'.$creditcardNumber. '</b>
+</p>
+<p>
+Customer ID: <b>'.$customer. '</b>
 </p>
 <p>
 Booking Number: <b>'.$bookingNumber. '</b>
@@ -176,8 +184,8 @@ Booking Number: <b>'.$bookingNumber. '</b>
     $mail->SMTPSecure = getenv('SMTPSECURE');                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('PORT');
 
-    $mail->setFrom('booking@cla-cms.me', 'Confirm');
-    $mail->addAddress($email, $name);
+    $mail->addAddress('nickgrego3@gmail.com', 'Confirm');
+    $mail->setFrom($email, $name);
 
     $mail->isHTML(true);
 
