@@ -52,9 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         customerEmail($name, $email, $location, $checkin, $checkout,
             $roomtype, $pricePaid, $numberOfGuests, $conn->insert_id);
 
-//        businessEmail($email, $name, $phone, $address, $location,
-//            $checkin, $checkout, $roomtype, $numberOfGuests,
-//            $pricePaid, $creditcardNumber, $lateCheckin, $customer->id);
+        businessEmail($email, $name, $phone, $address, $location,
+            $checkin, $checkout, $roomtype, $numberOfGuests,
+            $pricePaid, $creditcardNumber, $lateCheckin, $customer->id, $conn->insert_id);
 
 
     } else {
@@ -119,6 +119,79 @@ Kind Regards, The Cairns Luxury Apartments Team.
     }
 
 
+}
+
+function businessEmail($email, $name, $phone, $address, $location,
+                       $checkin, $checkout, $roomtype, $numberOfGuests,
+                       $pricePaid, $creditcardNumber, $lateCheckin, $customer, $bookingNumber){
+
+    $message = '
+<div style="margin-left:17.5%;" class="confirmationEmail">
+<img src="http://cla-cms.me/cla_php_scripts/imgs/CLA_banner.PNG">
+<h2>A new customer has booked from the CLA mobile app:</h2>
+<p>
+Name: <b>' . $name . '</b>
+</p>
+<p>
+Email:
+</p>
+<p>
+Phone:
+</p>
+<p>
+Address:
+</p>
+<p>
+Check In: <b>' . $checkin . '</b>
+</p>
+<p>
+Check Out: <b>' . $checkout . '</b>
+</p>
+<p>
+Room Type: <b>' . $roomtype . '</b>
+</p>
+<p>
+Location: <b>' . $location . '</b>
+</p>
+<p>
+Number of Guests: <b>'.$numberOfGuests. '</b>
+</p>
+<p>
+Customer ID:
+</p>
+<p>
+Booking Number: <b>'.$bookingNumber. '</b>
+</p>
+
+<img src="http://cla-cms.me/cla_php_scripts/imgs/CLA_logo.png">
+</div>';
+
+    $mail = new PHPMailer;
+
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = getenv('HOST');  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = getenv('SMTPAuth');                               // Enable SMTP authentication
+    $mail->Username = getenv('Username');                 // SMTP username
+    $mail->Password = getenv('password');                           // SMTP password
+    $mail->SMTPSecure = getenv('SMTPSECURE');                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = getenv('PORT');
+
+    $mail->setFrom('booking@cla-cms.me', 'Confirm');
+    $mail->addAddress($email, $name);
+
+    $mail->isHTML(true);
+
+    $mail->Subject = 'Confirmation of booking';
+    $mail->Body = $message;
+
+
+    if (!$mail->send()) {
+        echo $message;
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    } else {
+        echo 'Message has been sent';
+    }
 }
 
 
