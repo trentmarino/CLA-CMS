@@ -128,7 +128,7 @@ var pageElements = {
         colour = "green";
         setField.style.backgroundColor = colour;
         console.log("product id is " + product);
-        ArrayInformation[index] = jsonBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/" + image.name, currentArray[index]);
+        ArrayInformation[index] = jsonBuilder(4, product, "http://54.206.36.198/cla_php_scripts/server/php/files/" + image.name, currentArray[index]);
     };
 
 },
@@ -299,7 +299,7 @@ var updatePageElements = {
             colour = "green";
             setField.style.backgroundColor = colour;
             console.log("product id is " + product);
-            ArrayInformation[index] = updateBuilder(4, product, "http://cla-cms.me/cla_php_scripts/server/php/files/" + image.name, currentArray[index],contentid);
+            ArrayInformation[index] = updateBuilder(4, product, "http://54.206.36.198/cla_php_scripts/server/php/files/" + image.name, currentArray[index],contentid);
         };
 
         // image.onclick = function () {
@@ -338,3 +338,5 @@ var updatePageElements = {
         // };
     }
 };  
+
+

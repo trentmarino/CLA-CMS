@@ -33,7 +33,7 @@ include 'envronment_test.php';
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">Accept Deposit</a></li>
+                <li><a href="payment/booking.php">Accept Deposit</a></li>
                 <li><a href="#contact">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->

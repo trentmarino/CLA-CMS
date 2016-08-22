@@ -356,7 +356,7 @@
                     if (content !== null) {
                         imageElement.setAttribute('src', content);
                     } else {
-                        imageElement.setAttribute('src', "server/php/files/" + file.name);
+                        imageElement.setAttribute('src', "../server/php/files/" + file.name);
                     }
                     imageElement.setAttribute('width', "100%");
                     imageElement.setAttribute('height', "75%");

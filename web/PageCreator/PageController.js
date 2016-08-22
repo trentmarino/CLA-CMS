@@ -1,7 +1,7 @@
 /**
  * Created by trentmarino on 11/08/2016.
  */
-
+    
     var container = document.getElementById("blocks");
     var addBlock = document.getElementById("addBlock");
     var removeBlock = document.getElementById("removeBlock");
@@ -20,6 +20,7 @@
     var currentArray = [];
     var expandState = 0;
     var blockID;
+    var needUpdating = false;
 
     var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours", "Rates", "Footer"];
 
@@ -35,7 +36,10 @@ function loadPage(product) {
         $.each(result, function (index, field) {
             console.log(field);
             if(field !== null) {
+                needUpdating = true;
                 updatePages.UpdateBlock(field,index);
+            }else{
+                needUpdating = false;
             }
         });
     });
@@ -65,18 +69,25 @@ commit.onclick = function () {
     var productsJSON = JSON.stringify(ArrayInformation);
     console.log(blockID);
     console.log(productsJSON);
-    // $.ajax({
-    //     url: 'insert_room_info.php',
-    //     type: 'post',
-    //     data: {"page": productsJSON},
-    //     success: function (data) {
-    //         console.log("Success");
-    //         $("#status").html(data).css("visibility", "visible");
-    //         $("#status-Block").css("visibility", "visible");
-    //     }
-    //
-    // });
 
+    if(needUpdating === false) {
+        $.ajax({
+            url: 'insert_room_info.php',
+            type: 'post',
+            data: {"page": productsJSON},
+            success: function (data) {
+                console.log("Success");
+                setInterval(function () {
+                    $("#status").html(data).css("visibility", "visible");
+                    $("#status-Block").css("visibility", "visible");
+
+                },3000);
+                $("#status").html(data).css("visibility", "hidden");
+                $("#status-Block").css("visibility", "hidden");
+            }
+
+        });
+    }else{
         $.ajax({
             url: 'update_room_content.php',
             type: 'post',
@@ -85,9 +96,15 @@ commit.onclick = function () {
                 console.log("Success");
                 $("#status").html(data).css("visibility", "visible");
                 $("#status-Block").css("visibility", "visible");
+                setInterval(function () {
+                    $("#status").html(data).css("visibility", "hidden");
+                    $("#status-Block").css("visibility", "hidden");
+                },3000);
+
             }
 
         });
+    }
 
     $("#result").val(productsJSON);
 
