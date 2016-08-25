@@ -11,7 +11,6 @@ require "db_connect_production.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require "db_connect_production.php";
 
-    echo "yep";
 
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -84,6 +83,13 @@ Your Check-In time is <b>' . $checkin . '</b> and your Check-Out time is <b>' . 
 <h3>Full Price:  <b>' . ($pricePaid * 10) . '</b></h3>
 <h3>Booking Number:  <b>'.$bookingNumber. '</b>
 <h3>Number of Guests:  <b>'.$numberOfGuests. '</b>
+<p>
+As a precautionary matter, late check in instructions are provided by default. We understand flight delays, traffic jams and 
+other unfortunate circumstances do occur. If any event prohibits you from checking in on time, follow these instructions.
+</p>
+<p>
+***INSTRUCTIONS ON LATE CHECK IN***
+</p>
 <p>
 Please enjoy your stay.
 Kind Regards, The Cairns Luxury Apartments Team.
@@ -161,7 +167,8 @@ Number of Guests: <b>'.$numberOfGuests. '</b>
 </p>
 <p>
 Price Paid: <b>'.$pricePaid. '</b>
-</p><p>
+</p>
+<p>
 Credit Card Number: <b>'.$creditcardNumber. '</b>
 </p>
 <p>

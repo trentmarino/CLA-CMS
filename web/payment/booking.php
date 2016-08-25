@@ -11,12 +11,12 @@
     <script src="../js/vendor/jquery.ui.widget.js"></script>
     <script src="../js/jquery.iframe-transport.js"></script>
     <script src="../js/jquery.fileupload.js"></script>
+    <script src="booking%20table.css"></script>
 
 </head>
 <body>
 <?php
-include '../envronment_test.php';
-
+include '../db_connect_production.php';
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -28,34 +28,39 @@ include '../envronment_test.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../index.php">Cairns Luxury Apartments App CMS</a>
+            <a class="navbar-brand" href="#">Cairns Luxury Apartments App CMS</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ><a href="../index.php">Home</a></li>
-                <li class="active" ><a  href="booking.php">Accept Deposit</a></li>
+                <li><a href="../index.php">Home</a></li>
+                <li class="active"><a href="booking.php">Accept Deposit</a></li>
                 <li><a href="#contact">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
-<div class=" row headingSection ">
-    <div class=" col">
-    <table class="customer" border="1" >
+<div class=" tableHeading">
+    <div class=" customerTable">
+    <table class="customer table table-striped table-hover table-condensed table-responsive table-bordered" align="center">
         <tr>
-        <th>Name </th>
-        <th>email </th>
-        <th>Phone   </th>
-        <th>Address </th>
-        <th>Location </th>
-        <th>Room Type</th>
-        <th>Check-In </th>
-        <th>Check-Out </th>
-        <th>Late booking </th>
-        <th>Price Paid </th>
-        <th>Confirm </th>
+        <th class="custName">No. </th>
+        <th class="custName">ID# </th>
+        <th class="custName">Name </th>
+        <th class="custEmail">email </th>
+        <th class="custPhone">Phone   </th>
+        <th class="custAddress">Address </th>
+        <th class="custLocation ">Location </th>
+        <th class="custRoomType">Room Type</th>
+        <th class="custCheckIn">Check-In </th>
+        <th class="custCheckout">Check-Out </th>
+        <th class="LateBooking">Late booking </th>
+        <th class="pricePaid">Price Paid </th>
+        <th class="confirm">Confirm </th>
         </tr>
+        <tbody>
+        
+        </tbody>
     </table>
     </div>
 </div>
