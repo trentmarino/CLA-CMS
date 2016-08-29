@@ -11,6 +11,7 @@ require "db_connect_production.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require "db_connect_production.php";
 
+    echo "yep";
 
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -167,8 +168,7 @@ Number of Guests: <b>'.$numberOfGuests. '</b>
 </p>
 <p>
 Price Paid: <b>'.$pricePaid. '</b>
-</p>
-<p>
+</p><p>
 Credit Card Number: <b>'.$creditcardNumber. '</b>
 </p>
 <p>
@@ -208,6 +208,5 @@ Booking Number: <b>'.$bookingNumber. '</b>
         echo 'Message has been sent';
     }
 }
-
 
 
