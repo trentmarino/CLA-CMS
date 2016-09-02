@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pricePaid = $_POST['pricepaid'];
     $creditcardNumber = $_POST['creditcardNumber'];
     $lateCheckin = $_POST['lateCheckIn'];
+    $propertyID = $_POST['propertyid'];
 
 
     $customer = \Stripe\Customer::create(array(
@@ -35,12 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "INSERT INTO customers(name, email,phone,address,
         location,checkin,checkout,roomtype,numberOfGuests,pricePaid,
-        creditcardNumber, lateCheckIn, stripeID)
+        creditcardNumber, lateCheckIn, stripeID, propertyid)
         VALUES ('$name','$email','$phone', '$address','$location','$checkin','$checkout',
-        '$roomtype','$numberOfGuests','$pricePaid','$creditcardNumber', '$lateCheckin','$customer->id') ";
-
-
-
+        '$roomtype','$numberOfGuests','$pricePaid','$creditcardNumber', '$lateCheckin','$customer->id', '$propertyID') ";
     ?>
 
     <?php

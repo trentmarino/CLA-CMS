@@ -11,7 +11,7 @@
     <script src="../js/vendor/jquery.ui.widget.js"></script>
     <script src="../js/jquery.iframe-transport.js"></script>
     <script src="../js/jquery.fileupload.js"></script>
-    <script src="booking%20table.css"></script>
+    <script src="bookingtable.css"></script>
 
 </head>
 <body>
@@ -42,26 +42,27 @@ include '../db_connect_production.php';
 
 <div class=" tableHeading">
     <div class=" customerTable">
-    <table class="customer table table-striped table-hover table-condensed table-responsive table-bordered" align="center">
-        <tr>
-        <th class="custName">No. </th>
-        <th class="custName">ID# </th>
-        <th class="custName">Name </th>
-        <th class="custEmail">email </th>
-        <th class="custPhone">Phone   </th>
-        <th class="custAddress">Address </th>
-        <th class="custLocation ">Location </th>
-        <th class="custRoomType">Room Type</th>
-        <th class="custCheckIn">Check-In </th>
-        <th class="custCheckout">Check-Out </th>
-        <th class="LateBooking">Late booking </th>
-        <th class="pricePaid">Price Paid </th>
-        <th class="confirm">Confirm </th>
-        </tr>
-        <tbody>
-        
-        </tbody>
-    </table>
+        <table class="customer table table-striped table-hover table-condensed table-responsive table-bordered" align="center">
+            <tr>
+                <th class="custName">No. </th>
+                <th class="custName">ID# </th>
+                <th class="custName">Name </th>
+                <th class="custEmail">email </th>
+                <th class="custPhone">Phone   </th>
+                <th class="custAddress">Address </th>
+                <th class="custLocation ">Location </th>
+                <th class="custRoomType">Room Type</th>
+                <th class="custCheckIn">Check-In </th>
+                <th class="custCheckout">Check-Out </th>
+                <th class="LateBooking">Late booking </th>
+                <th class="pricePaid">Price Paid </th>
+                <th class="confirm">Confirm </th>
+                <th class="notAvailable">Not Available</th>
+            </tr>
+            <tbody>
+
+            </tbody>
+        </table>
     </div>
 </div>
 <script src="PullDetails.js"></script>

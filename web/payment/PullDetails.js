@@ -28,11 +28,27 @@
                     '<label><input type="checkbox" value="' + value.id_cust + '"></label>' +
                     '</div>' +
                     '</td>' +
-                    '</tr>');
+                    '<td>' +
+                    '<div class="checkbox notAvail" id="'+key+'">' +
+                    '<label><input type="checkbox" value="' + value.id_cust + '"></label>' +
+                    '</div>' +
+                    '</td>' +
+                    '</tr>')
+
+                ;
+
+                $('#'+key).click(function() {
+                    $("#txtAge").toggle(this.checked);
+                    console.log("not available");
+                });
+
+
             });
 
         }
     });
+
+
 
 
 })();
