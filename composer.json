@@ -34,7 +34,9 @@
   ],
   "require": {
     "php": ">=5.5",
-    "josegonzalez/dotenv": "dev-master"
+    "josegonzalez/dotenv": "dev-master",
+    "php-http/guzzle6-adapter": "^1.1",
+    "norkunas/onesignal-php-api": "1.0.x-dev"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"

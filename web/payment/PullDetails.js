@@ -2,7 +2,9 @@
  * Created by trentmarino on 15/08/2016.
  */
 (function () {
+    var self =  this;
 
+     var pushID = undefined;
     $.ajax({
         url: '../get_customer_info.php',
         type: 'get',
@@ -10,6 +12,7 @@
         success: function (json) {
             $.each(json, function (key, value) {
                 console.log(key, value.name);
+                pushID  = value.onesignalid;
                 $('.customer').append('<tr class="elements" data="' + key + '">' +
                     '<td>' + key + '</td>' +
                     '<td>' + value.id_cust + '</td>' +
@@ -40,6 +43,15 @@
                 $('#'+key).click(function() {
                     $("#txtAge").toggle(this.checked);
                     console.log("not available");
+                    console.log(pushID);
+                    $.ajax({
+                        url: 'SendPush.php',
+                        type: 'post',
+                        data: {"onesignalid": pushID },
+                        success : function (data) {
+                            console.log(data);
+                        }
+                    })
                 });
 
 

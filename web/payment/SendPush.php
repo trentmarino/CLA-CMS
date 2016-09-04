@@ -1,0 +1,29 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: trentmarino
+ * Date: 4/09/2016
+ * Time: 1:43 PM
+ */
+
+include('../httpful.phar');
+
+$deviceID =$_POST['onesignalid'];
+$data = '
+{
+  "app_id": "fd6c0c59-a053-4d00-96ee-774304545d17",
+  "data": {"foo": "bar"},
+  "include_player_ids": ["'.$deviceID.'"],
+  "contents": {"en": 
+  "TestMessage "}
+}
+';
+
+$response = \Httpful\Request::post('https://onesignal.com/api/v1/notifications')
+    ->sendsJson()
+    ->addHeader('Authorization', 'Basic NGExNDY0NzMtYjQ4Yy00YTQ2LWFlMTktMTE2MDEwNGRjZDJi')
+//    ->addHeader('Authorization', 'Basic ZWE3YTI2ZDctZWU5YS00ZDNhLWFiZjAtODE5ODJjZjcwMmQ1')
+    ->body($data)// attach a body/payload...
+    ->send();
+
+echo $response;
