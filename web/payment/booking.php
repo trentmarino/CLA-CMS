@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../Remodal-master/dist/remodal.css">
+    <link rel="stylesheet" href="../Remodal-master/dist/remodal-default-theme.css">
+    <script src="../Remodal-master/dist/remodal.min.js"></script>
+    <script src="../js/vendor/jquery.ui.widget.js"></script>
+    <script src="../js/jquery.iframe-transport.js"></script>
+    <script src="../js/jquery.fileupload.js"></script>
+
 </head>
 <body>
 <?php
@@ -35,6 +42,34 @@ include '../db_connect_production.php';
     </div>
 </nav>
 
+<div class="remodal-bg">
+
+    <div class="remodal" data-remodal-id="modal"
+         data-remodal-options="hashTracking: false, closeOnOutsideClick: false, hashTracking: false;">
+
+        <button data-remodal-action="close" class="remodal-close"></button>
+        <form class="formDropdowns" id="update" action="#" method="post" enctype="multipart/form-data">
+            <label>
+                Property:
+            </label>
+            <select class="property">
+            </select>
+            <label id="roomLabel">
+                Room:
+            </label>
+            <select class="room">
+            </select>
+            <p>Check In: <input type="text" id="datepickerIn"> Check Out: <input type="text" id="datepickerOut">
+                <br><br><input type="button" value="Add" class="addOptions btn btn-success"></p>
+
+            <textarea class="roomOptions" rows="5" cols="70"></textarea>
+        </form>
+
+        <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+        <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+    </div>
+</div>
+
 <div class=" tableHeading">
     <div class=" customerTable">
         <table class="customer table table-striped table-hover table-condensed table-responsive table-bordered" align="center">
@@ -61,5 +96,7 @@ include '../db_connect_production.php';
     </div>
 </div>
 <script src="PullDetails.js"></script>
+<!--<script src="not_available_options.js"></script>-->
+
 </body>
 </html>
