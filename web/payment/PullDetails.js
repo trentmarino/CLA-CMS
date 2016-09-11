@@ -33,26 +33,25 @@
                     '</td>' +
                     '<td>' +
                     '<div class="checkbox notAvail" id="'+key+'">' +
-                    '<label><input type="checkbox" value="' + value.id_cust + '"></label>' +
+                    '<label><input class="notAvaible" type="checkbox" value="' + value.onesignalid + '"></label>' +
                     '</div>' +
                     '</td>' +
-                    '</tr>')
-
-                ;
+                    '</tr>');
 
                 $('#'+key).click(function() {
-                    $("#txtAge").toggle(this.checked);
+                    var pushThingy = $('.notAvaible').val();
                     console.log("not available");
-                    console.log(pushID);
-                    $.ajax({
-                        url: 'SendPush.php',
-                        type: 'post',
-                        data: {"onesignalid": pushID },
-                        success : function (data) {
-                            console.log(data);
-                        }
-                    })
+                    console.log(pushThingy);
+                        $.ajax({
+                            url: 'SendPush.php',
+                            type: 'post',
+                            data: {"onesignalid": value.onesignalid, "checkin": value.checkin},
+                            success: function (data) {
+                                console.log(data);
+                            }
+                        })
                 });
+
 
 
             });
