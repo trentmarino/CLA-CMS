@@ -16,6 +16,7 @@
     var pushID = undefined;
     var roomLocation = undefined;
     var roomType = undefined;
+    var roomPrice = undefined;
 
     $.ajax({
         type: "POST",
@@ -29,16 +30,16 @@
                 currentLocation = value;
             });
 
-            // $('.property').ready(function () {
-            //     $('.property').attr('value',currentLocation);
-            //     $('.property').val(currentLocation);
-            //     $('.room').css('visibility', "visible");
-            //     $('#roomLabel').css('visibility', "visible");
-            //     selectedProperty = $(this).val();
-            //     console.log(selectedProperty);
-            //         otherDropDown();
-            //
-            // });
+            $('.property').ready(function () {
+                $('.property').attr('value',currentLocation);
+                $('.property').val(currentLocation);
+                $('.room').css('visibility', "visible");
+                $('#roomLabel').css('visibility', "visible");
+                selectedProperty = $(this).val();
+                console.log(selectedProperty);
+                    otherDropDown();
+
+            });
 
             console.log($('.property').val());
             if($('.property').val() == 1){
@@ -86,13 +87,11 @@
                             //loader.style.visibility = "visible";
                         }
                         console.log("this is the product id " +productID);
-                        $("#roomName").val(value.product_name).prop("readonly", true);
-                        $("#productid").val(value.idproduct).prop("readonly", true);
-                        $("#location").val(value.property_name).prop("readonly", true);
-                        $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
-                        $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
-                        $("#noGuests").val(value.max_pax).prop("readonly", true);
-                        populateFields(value);
+                        console.log("this is the product id " +value.product_name);
+                        roomLocation = value.property_name;
+                        roomType = value.product_name;
+                        roomPrice = value.deposit_amount_min;
+
 
 
                     }
@@ -103,33 +102,20 @@
 
         });
     }
-    function populateFields(value) {
-        $('.room').on('change', function () {
-            console.log("room type" + $('.room').val());
-            if($('.room').val() === value.idproduct) {
-                productID = value.idproduct;
-                roomLocation = value.property_name;
-                roomType = value.product_name;
-                $("#roomName").val(value.product_name).prop("readonly", true);
-                $("#productid").val(value.idproduct).prop("readonly", true);
-                $("#location").val(value.property_name).prop("readonly", true);
-                $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
-                $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
-                $("#noGuests").val(value.max_pax).prop("readonly", true);
-            }
-        });
-    }
+    
+    
 
     $('.addOptions').on('click',function () {
         var optionObject = {
             location: roomLocation,
             roomType: roomType,
+            price: roomPrice,
             checkIn: $('#datepickerIn').datepicker({ dateFormat: 'dd-mm-yy' }).val(),
             checkOut: $('#datepickerOut').datepicker({ dateFormat: 'dd-mm-yy' }).val()
         };
         console.log(optionObject);
-        $('.roomOptions').append(optionObject.location + " " + optionObject.roomType + " " + optionObject.checkIn + " " + optionObject.checkOut + "\n");
-    })
+        $('.roomOptions').append(optionObject.location + " " + optionObject.roomType + " " + optionObject.checkIn + " " + optionObject.checkOut +" $"+ optionObject.price+"\n");
+    });
 
     $.ajax({
         url: '../get_customer_info.php',
@@ -165,29 +151,30 @@
                     '</tr>')
 
                 ;
-
                 $('#'+key).click(function() {
                     var inst = $('[data-remodal-id=modal]').remodal();
-
                     inst.open();
-
                     console.log("not available");
-                    console.log(pushID);
+                    console.log(value.onesignalid);
                     $.ajax({
                         url: 'SendPush.php',
                         type: 'post',
-                        data: {"onesignalid": pushID },
+                        data: {"onesignalid": value.onesignalid, "checkin": value.checkin },
                         success : function (data) {
                             console.log(data);
                         }
                     })
                 });
+                
+           
 
 
             });
 
         }
-    });
+    })
+    
+    
 
     $( function() {
         $( "#datepickerIn" ).datepicker({

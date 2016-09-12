@@ -26,16 +26,16 @@ $.ajax({
             currentLocation = value;
         });
 
-        // $('.property').ready(function () {
-        //     $('.property').attr('value',currentLocation);
-        //     $('.property').val(currentLocation);
-        //     $('.room').css('visibility', "visible");
-        //     $('#roomLabel').css('visibility', "visible");
-        //     selectedProperty = $(this).val();
-        //     console.log(selectedProperty);
-        //         otherDropDown();
-        //
-        // });
+        $('.property').ready(function () {
+            $('.property').attr('value',currentLocation);
+            $('.property').val(currentLocation);
+            $('.room').css('visibility', "visible");
+            $('#roomLabel').css('visibility', "visible");
+            selectedProperty = $(this).val();
+            console.log(selectedProperty);
+            otherDropDown();
+
+        });
 
         console.log($('.property').val());
         if($('.property').val() == 1){
@@ -79,17 +79,19 @@ function otherDropDown() {
                     $(".room").append($('<option></option>').val(value.idproduct).html(value.product_name));
                     populated = true;
                     productID = value.idproduct;
+                    podructName = value.product_name;
                     if(populated === true){
                         //loader.style.visibility = "visible";
                     }
                     console.log("this is the product id " +productID);
-                    $("#roomName").val(value.product_name).prop("readonly", true);
-                    $("#productid").val(value.idproduct).prop("readonly", true);
-                    $("#location").val(value.property_name).prop("readonly", true);
-                    $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
-                    $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
-                    $("#noGuests").val(value.max_pax).prop("readonly", true);
-                    populateFields(value);
+                    console.log("this is the product id " + podructName);
+                    // $("#roomName").val(value.product_name).prop("readonly", true);
+                    // $("#productid").val(value.idproduct).prop("readonly", true);
+                    // $("#location").val(value.property_name).prop("readonly", true);
+                    // $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
+                    // $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
+                    // $("#noGuests").val(value.max_pax).prop("readonly", true);
+                    // populateFields(value);
 
 
                 }
@@ -101,20 +103,6 @@ function otherDropDown() {
 
         }
 
-    });
-}
-function populateFields(value) {
-    $('.room').on('change', function () {
-        console.log("room type" + $('.room').val());
-        if($('.room').val() === value.idproduct) {
-            productID = value.idproduct;
-            $("#roomName").val(value.product_name).prop("readonly", true);
-            $("#productid").val(value.idproduct).prop("readonly", true);
-            $("#location").val(value.property_name).prop("readonly", true);
-            $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
-            $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
-            $("#noGuests").val(value.max_pax).prop("readonly", true);
-        }
     });
 }
 

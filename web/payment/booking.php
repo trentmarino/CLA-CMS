@@ -62,7 +62,7 @@ include '../db_connect_production.php';
             <p>Check In: <input type="text" id="datepickerIn"> Check Out: <input type="text" id="datepickerOut">
                 <br><br><input type="button" value="Add" class="addOptions btn btn-success"></p>
 
-            <textarea class="roomOptions" rows="5" cols="70"></textarea>
+            <textarea class="roomOptions" rows="5" cols="75"></textarea>
         </form>
 
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>

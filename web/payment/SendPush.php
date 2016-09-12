@@ -12,12 +12,13 @@ $checkInDate = $_POST['checkin'];
 $data = '
 {
   "app_id": "fd6c0c59-a053-4d00-96ee-774304545d17",
-   "delayed_option":"timezone",
-   "send_after":"'.$checkInDate.' 09:00:00 GMT+1000",
+  "large_icon": "logo",
+  "delayed_option":"timezone",
+  "send_after":"'.$checkInDate.' 14:04:00 GMT+1000",
   "include_player_ids": ["'.$deviceID.'"],
   "contents": {"en": 
-  "TestMessage 
-  '.$checkInDate.'
+  "We are just letting you know you are checking in today 
+  the '.$checkInDate.'
   "}
 }
 ';
