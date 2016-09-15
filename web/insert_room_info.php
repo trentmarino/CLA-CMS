@@ -1,5 +1,5 @@
 <?php
-include "envronment_test.php";
+include "db_connect_production.php";
 
 //$productsJSON = $_POST['page'];
 //$productsArr = json_decode($productsJSON);
@@ -20,9 +20,14 @@ include "envronment_test.php";
 
 
 $productsJSON = $_POST['page'];
-$productsArr = json_decode(stripslashes($productsJSON));
+
+$productsArr = json_decode($productsJSON);
+echo $productsArr;
+
+
 $sql = "INSERT INTO page_content (idproduct, info_type, content, content_order)
     VALUES";
+
 
 $valuesArr = array();
 foreach($productsArr  as $product){

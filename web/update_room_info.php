@@ -1,28 +1,33 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: trentmarino
+ * Date: 11/08/2016
+ * Time: 4:19 PM
+ */
 
-include "envronment_test.php";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $idproduct = $_POST["productid"];
-    $product_name = $_POST["roomName"];
-    $deposit_amount_min = $_POST["min-rate"];
-    $deposit_amount_max = $_POST["max-rate"];
-    $max_pax = $_POST["noGuests"];
-}else{
-    echo "zxdfghjcxfcvbnm";
+include 'envronment_test.php';
+$productsJSON = $_POST['page'];
+$productsArr = json_decode($productsJSON);
+$valuesArr = array();
+foreach($productsArr  as $product){
+    $type = $product->type;
+    $idProduct =$product->productid;
+    $content = $product->content;
+    $contentOrder = $product->content_order;
+    $contentId = $product->content_id;
+    $valuesArr = array("idproduct='$idProduct'", "info_type='$type'",
+        "content='$content'","content_order='$contentOrder'");
 }
 
-$sql = "UPDATE `product` SET `max_pax`='.$max_pax.', `product_name`='".$product_name."' ,
-deposit_amount_min='".$deposit_amount_min."',deposit_amount_max ='".$deposit_amount_max."'
-WHERE `idproduct`= $idproduct";
+$query = "UPDATE `page_content` SET ";
+$query = $query . implode(",", $valuesArr) . "WHERE idcontent=$contentId";
+
+echo $query;
 
 
-
-if ($conn->query($sql) === TRUE) {
-    echo "Record updated successfully";
+if ($conn->query($query) === TRUE) {
+    echo "New record created successfully";
 } else {
-    echo "Error updating record: " . $conn->error;
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
-
-$conn->close();
-?>

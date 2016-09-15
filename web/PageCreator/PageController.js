@@ -1,28 +1,28 @@
 /**
  * Created by trentmarino on 11/08/2016.
  */
-    
-    var container = document.getElementById("blocks");
-    var addBlock = document.getElementById("addBlock");
-    var removeBlock = document.getElementById("removeBlock");
-    var loader = document.getElementById("loadPage");
-    var commit = document.getElementById("commit");
-    var preview = document.getElementById("preview");
-    var page = document.getElementById("description");
-    var count = 0;
-    var pageLoaded = false;
-    var contentType;
-    var product;
-    var ArrayInformation = [];
-    var colour = "red";
-    var hasBeenChanged;
-    var currentOrder;
-    var currentArray = [];
-    var expandState = 0;
-    var blockID;
-    var needUpdating = false;
 
-    var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours", "Rates", "Footer"];
+var container = document.getElementById("blocks");
+var addBlock = document.getElementById("addBlock");
+var removeBlock = document.getElementById("removeBlock");
+var loader = document.getElementById("loadPage");
+var commit = document.getElementById("commit");
+var preview = document.getElementById("preview");
+var page = document.getElementById("description");
+var count = 0;
+var pageLoaded = false;
+var contentType;
+var product;
+var ArrayInformation = [];
+var colour = "red";
+var hasBeenChanged;
+var currentOrder;
+var currentArray = [];
+var expandState = 0;
+var blockID;
+var needUpdating = false;
+
+var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours", "Rates", "Footer"];
 
 
 addBlock.onclick = function () {
@@ -67,7 +67,7 @@ loader.onclick = function () {
 
 commit.onclick = function () {
     var productsJSON = JSON.stringify(ArrayInformation);
-    console.log(blockID);
+    // console.log(blockID);
     console.log(productsJSON);
 
     if(needUpdating === false) {

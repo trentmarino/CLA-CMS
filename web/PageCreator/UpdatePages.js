@@ -30,7 +30,7 @@ var  updatedBlocks = function (type, block, index, content, contentid) {
         index = currentArray.indexOf(index);
     }
     if (type === "Heading" || type == 1) {
-       updatePageElements.HeadingObject(block, index, content, contentid)
+        updatePageElements.HeadingObject(block, index, content, contentid)
     } else if (type === "Sub-Heading" || type == 2) {
         updatePageElements.SubHeadingObject(block, index, content, contentid);
     } else if (type === "Paragraph" || type == 3) {
@@ -38,7 +38,7 @@ var  updatedBlocks = function (type, block, index, content, contentid) {
     } else if (type === "Image" || type == 4) {
         updatePageElements.ImageObject(block, index, content, contentid);
     } else if (type === "Tours" || type == 5) {
-        updatePageElements.TourObject(block, index, content, contentid);
+        updatePageElements.TourObject(block, index, content,contentid);
 
     } else if (type === "Rates" || type == 6) {
         updatePageElements.RateObject(block, index, content, contentid);
