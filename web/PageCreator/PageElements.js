@@ -180,7 +180,7 @@ var pageElements = {
                         // block.innerHTML += "<img src='+ "'width='100%' height='75%'>";
                         image = file;
                         imageCount++;
-                        tourObject.image = file.name;
+                        tourObject.image = "http://54.206.36.198/cla_php_scripts/server/php/files/" + file.name;
 
                     });
                 }
@@ -430,7 +430,7 @@ var updatePageElements = {
                         // block.innerHTML += "<img src='+ "'width='100%' height='75%'>";
                         image = file;
                         imageCount++;
-                        tourObject.image = file.name;
+                        tourObject.image = "http://54.206.36.198/cla_php_scripts/server/php/files/" + file.name;
 
                     });
                 }
