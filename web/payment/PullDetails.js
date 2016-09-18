@@ -17,6 +17,9 @@
     var roomLocation = undefined;
     var roomType = undefined;
     var roomPrice = undefined;
+    var email = undefined;
+    var name = undefined;
+    var bookingID = undefined;
 
     $.ajax({
         type: "POST",
@@ -151,11 +154,15 @@
                     '</tr>')
 
                 ;
+
                 $('#'+key).click(function() {
                     var inst = $('[data-remodal-id=modal]').remodal();
                     inst.open();
                     console.log("not available");
                     console.log(value.onesignalid);
+                    email = value.email;
+                    name = value.name;
+                    bookingID = value.id_cust;
                     $.ajax({
                         url: 'SendPush.php',
                         type: 'post',
@@ -165,7 +172,8 @@
                         }
                     })
                 });
-                
+
+
            
 
 
@@ -186,5 +194,16 @@
             dateFormat: "dd-mm-yy"
         });
     } );
-
+    $('.remodal-confirm').click (function(){
+        var x = document.getElementById("roomOptions").value;
+        console.log(x);
+        $.ajax({
+            url: "notAvailable.php",
+            type: "post",
+            data: {'notAvailableEmail': x, 'email': email, 'name': name, 'bookingID': bookingID},
+            success : function(response) {
+                console.log(response);
+            }
+        })
+    })
 })();
