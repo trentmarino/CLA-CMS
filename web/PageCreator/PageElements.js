@@ -234,12 +234,14 @@ var pageElements = {
 var updatePageElements = {
     HeadingObject: function (block, index, content, contentid) {
 
+
         block.innerHTML += '<h1> Heading </h1>' +
             '<label> Heading: </label>' +
             '<input id="head' + index + '" type="text">' +
             '<input type="button" id="set' + index + '" style="margin-right: 0; background-color: red" value="Set Field"> ';
-        var headText = document.getElementById("head" + index);
 
+        var headText = document.getElementById("head" + index);
+        block.innerHTML += '<button type="button" onclick="deletePost(contentid)">deltePost</button>';
         if (content !== null) {
             headText.value = content;
         }
@@ -326,18 +328,24 @@ var updatePageElements = {
 
         var setField = document.getElementById("set" + index);
 
-        var image;
+        var image = undefined;
         var imageCount = 0;
+        var imageElement = document.createElement("img");
+        imageElement.setAttribute('width', "100%");
+        imageElement.setAttribute('height', "100%");
+        if (content !== null) {
+            console.log(content);
+            // imageElement.setAttribute('src', content);
+            imageElement.setAttribute('src', content);
+            block.insertBefore(imageElement, block.children[7]);
+
+        }
         $('#fileupload' + index).fileupload({
             dataType: 'json',
             done: function (e, data) {
                 $.each(data.result.files, function (index1, file) {
                     var imageElement = document.createElement("img");
-                    if (content !== null) {
-                        imageElement.setAttribute('src', content);
-                    } else {
-                        imageElement.setAttribute('src', "server/php/files/" + file.name);
-                    }
+                    imageElement.setAttribute('src', "server/php/files/" + file.name);
                     imageElement.setAttribute('width', "100%");
                     imageElement.setAttribute('height', "75%");
                     if (imageCount === 1) {
@@ -406,7 +414,7 @@ var updatePageElements = {
             if (content !== null) {
                 console.log(content);
                 // imageElement.setAttribute('src', content);
-                imageElement.setAttribute('src', 'server/php/files/'+content.image);
+                imageElement.setAttribute('src', content.image);
                 block.insertBefore(imageElement, block.children[7]);
 
             }
@@ -480,4 +488,18 @@ var updatePageElements = {
 
 };  
 
+
+var deletePost = function (id) {
+    console.log(id);
+    
+    // $.ajax({
+    //     type: 'post',
+    //     url: 'deletePost.php',
+    //     data:{"contentID": id},
+    //     success: function (response) {
+    //         console.log(response)
+    //     }
+    //
+    // })
+}
 
