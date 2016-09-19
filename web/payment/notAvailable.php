@@ -5,23 +5,18 @@ require_once('../stripe-php-master/init.php');
 require_once('../PHPMailer/PHPMailerAutoload.php');
 require '../emailConfig.php';
 
-
 $name = $_POST['name'];
 $email = $_POST['email'];
 $bookingID = $_POST['bookingID'];
 $bob = $_POST['notAvailableEmail'];
 echo $bob."jdnfjnf";
 
-
-
-
-
     $message = '
 <div style="margin-left:17.5%;" class="confirmationEmail">
 <img src="http://cla-cms.me/cla_php_scripts/imgs/CLA_banner.PNG">
 <p>
 Hello ' . $name . '
-Unfortunately the room you selected was unavailable, although, the following rooms are:
+Unfortunately the room you selected was unavailable. However, the following rooms are available:
 </p>
 <p>
 ' . $bob . '
@@ -34,23 +29,18 @@ Kind Regards, The Cairns Luxury Apartments Team.
 </div>';
 echo  $message;
     $mail = new PHPMailer;
-
     $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = getenv('HOST');  // Specify main and backup SMTP servers
-    $mail->SMTPAuth = getenv('SMTPAuth');                               // Enable SMTP authentication
+    $mail->Host = getenv('HOST');                         // Specify main and backup SMTP servers
+    $mail->SMTPAuth = getenv('SMTPAuth');                 // Enable SMTP authentication
     $mail->Username = getenv('Username');                 // SMTP username
-    $mail->Password = getenv('password');                           // SMTP password
-    $mail->SMTPSecure = getenv('SMTPSECURE');                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Password = getenv('password');                 // SMTP password
+    $mail->SMTPSecure = getenv('SMTPSECURE');             // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('PORT');
-
     $mail->setFrom('booking@cla-cms.me', 'Confirm');
     $mail->addAddress($email, $name);
-
     $mail->isHTML(true);
-
-    $mail->Subject = 'Booking #' . $bookingID . 'Unavailable';
+    $mail->Subject = 'Booking #' . $bookingID . ' Unavailable';
     $mail->Body = $message;
-
 
     if (!$mail->send()) {
         echo $message;

@@ -57,10 +57,7 @@ $.ajax({
 
             } else {
                 otherDropDown();
-
-
             }
-
         });
     }
 });
