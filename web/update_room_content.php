@@ -6,9 +6,9 @@
  * Time: 4:19 PM
  */
 
-include 'envronment_test.php';
+include 'environment_test.php';
 $productsJSON = $_POST['page'];
-$productsArr = json_decode(stripslashes($productsJSON));
+$productsArr = json_decode($productsJSON);
 $valuesArr = array();
 foreach($productsArr  as $product){
     $type = $product->type;

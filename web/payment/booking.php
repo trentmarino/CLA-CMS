@@ -36,7 +36,7 @@ include '../db_connect_production.php';
             <ul class="nav navbar-nav">
                 <li><a href="../index.php">Home</a></li>
                 <li class="active"><a href="booking.php">Accept Deposit</a></li>
-                <li><a href="#contact">Logout</a></li>
+                <li><a href="../Tours/toursToFile.php">Tours</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -97,7 +97,6 @@ include '../db_connect_production.php';
     </div>
 </div>
 <script src="PullDetails.js"></script>
-<!--<script src="not_available_options.js"></script>-->
 
 </body>
 </html>

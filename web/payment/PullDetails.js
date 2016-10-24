@@ -4,15 +4,9 @@
 
 (function () {
     var selectedProperty;
-    var propertyID;
     var populated = false;
-    var count  = 0;
     var productID;
     var currentLocation;
-    var loader = document.getElementById('loadPage');
-    var form = document.getElementById("update");
-    var updateButton = document.getElementById("update_room_info");
-    var self =  this;
     var pushID = undefined;
     var roomLocation = undefined;
     var roomType = undefined;
@@ -39,7 +33,6 @@
                 $('.room').css('visibility', "visible");
                 $('#roomLabel').css('visibility', "visible");
                 selectedProperty = $(this).val();
-                console.log(selectedProperty);
                     otherDropDown();
 
             });
@@ -49,7 +42,6 @@
                 $('.room').css('visibility', "visible");
                 $('#roomLabel').css('visibility', "visible");
                 selectedProperty = $('.property').val();
-                console.log(selectedProperty);
                 otherDropDown();
             }
 
@@ -79,9 +71,6 @@
             dataType: 'json',
             success: function (json) {
                 $.each(json.product, function (key, value) {
-                    console.log("hotel type" + selectedProperty);
-                    console.log([key]);
-
                     if ($('.property').val() === value.idproperty && value.is_thumb == 1) {
                         $(".room").append($('<option></option>').val(value.idproduct).html(value.product_name));
                         populated = true;
@@ -89,13 +78,9 @@
                         if(populated === true){
                             //loader.style.visibility = "visible";
                         }
-                        console.log("this is the product id " +productID);
-                        console.log("this is the product id " +value.product_name);
                         roomLocation = value.property_name;
                         roomType = value.product_name;
                         roomPrice = value.deposit_amount_min;
-
-
 
                     }
 
@@ -116,7 +101,6 @@
             checkIn: $('#datepickerIn').datepicker({ dateFormat: 'dd-mm-yy' }).val(),
             checkOut: $('#datepickerOut').datepicker({ dateFormat: 'dd-mm-yy' }).val()
         };
-        console.log(optionObject);
         $('.roomOptions').append(optionObject.location + " " + optionObject.roomType + " " + optionObject.checkIn + " " + optionObject.checkOut +" $"+ optionObject.price+"\n");
     });
 
@@ -126,9 +110,11 @@
         dataType: 'json',
         success: function (json) {
             $.each(json, function (key, value) {
-                console.log(key, value.name);
                 pushID  = value.onesignalid;
-                $('.customer').append('<tr class="elements" data="' + key + '">' +
+                console.log(value);
+                console.log(value.confirmed);
+
+                $('.customer').append('<tr class="elements" data="' + key + '" id="'+value.stripeID+'">' +
                     '<td>' + key + '</td>' +
                     '<td>' + value.id_cust + '</td>' +
                     '<td>' + value.name + '</td>' +
@@ -143,35 +129,73 @@
                     '<td>' + value.pricepaid + '</td>' +
                     '<td>' +
                     '<div class="checkbox">' +
-                    '<label><input type="checkbox" value="' + value.id_cust + '"></label>' +
+                    '<label><button class="btn" id="' + key + "confirm" + '" type="button" value="' + value.id_cust + '">' +
+                    'Confirm</label>' +
                     '</div>' +
                     '</td>' +
                     '<td>' +
-                    '<button id="'+key+'" class="btn" value="' + value.id_cust + '">' +
+                    '<button id="' + key + "not" + '" class="btn" value="' + value.id_cust + '">' +
                     'not' +
                     '</button>' +
                     '</td>' +
-                    '</tr>')
+                    '</tr>');
 
-                ;
+                if(parseInt(value.confirmed) === 1) {
+                    console.log("it is now green");
+                    $('#'+value.stripeID).css('background-color',"#3fde44");
 
-                $('#'+key).click(function() {
-                    var inst = $('[data-remodal-id=modal]').remodal();
-                    inst.open();
-                    console.log("not available");
-                    console.log(value.onesignalid);
-                    email = value.email;
-                    name = value.name;
-                    bookingID = value.id_cust;
+                }
+
+                $('#'+key+"confirm").click(function() {
                     $.ajax({
-                        url: 'SendPush.php',
+                        url: 'sendConfirmPush.php',
                         type: 'post',
-                        data: {"onesignalid": value.onesignalid, "checkin": value.checkin },
+                        data: {"onesignalid": value.onesignalid, "checkin": value.checkin, "customer": value.stripeID, "price": value.pricepaid, "confirm": 1},
                         success : function (data) {
                             console.log(data);
+                            $.ajax({
+                                url: 'processPayment.php',
+                                type: 'post',
+                                data: {"customer": value.stripeID, "pricepaid": value.pricepaid},
+                                success : function (data) {
+                                    console.log(data);
+                                    $.ajax({
+                                        url: 'confirmBooking.php',
+                                        type: 'post',
+                                        data: {"customer": value.stripeID, "confirm": 1},
+                                        success : function (data) {
+                                            console.log(data);
+                                            $('#'+value.stripeID).css('background-color',"green");
+
+                                        }
+                                    })
+
+                                }
+                            })
+                            
                         }
                     })
                 });
+
+                $("#"+key+"not").click(function () {
+                    var inst = $('[data-remodal-id=modal]').remodal();
+                    inst.open();
+                    email = value.email;
+                    name = value.name;
+                    bookingID = value.id_cust;
+                    $('.remodal-confirm').click (function(){
+                        var x = document.getElementById("roomOptions").value;
+                        console.log(x);
+                        $.ajax({
+                            url: "notAvailable.php",
+                            type: "post",
+                            data: {'notAvailableEmail': x, 'email': email, 'name': name, 'bookingID': bookingID},
+                            success : function(response) {
+                                console.log(response);
+                            }
+                        })
+                    })
+                })
 
 
            
@@ -194,16 +218,4 @@
             dateFormat: "dd-mm-yy"
         });
     } );
-    $('.remodal-confirm').click (function(){
-        var x = document.getElementById("roomOptions").value;
-        console.log(x);
-        $.ajax({
-            url: "notAvailable.php",
-            type: "post",
-            data: {'notAvailableEmail': x, 'email': email, 'name': name, 'bookingID': bookingID},
-            success : function(response) {
-                console.log(response);
-            }
-        })
-    })
 })();

@@ -1,5 +1,5 @@
 <?php
-include "envronment_test.php";
+include "environment_test.php";
 $productID = $_GET['name'];
 $sql = " SELECT * FROM `page_content` WHERE idproduct =".$productID;
 

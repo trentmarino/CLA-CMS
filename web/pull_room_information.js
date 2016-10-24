@@ -84,6 +84,7 @@
                         $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
                         $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
                         $("#noGuests").val(value.max_pax).prop("readonly", true);
+                        $("#roomDesc").val(value.roomdesc).prop("readonly", true);
                         populateFields(value);
 
 
@@ -109,6 +110,8 @@
                 $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
                 $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
                 $("#noGuests").val(value.max_pax).prop("readonly", true);
+                $("#roomDesc").val(value.roomdesc).prop("readonly", true);
+
             }
         });
     }
@@ -118,6 +121,8 @@
         $("#min-rate").prop("readonly", false);
         $("#max-rate").prop("readonly", false);
         $("#noGuests").prop("readonly", false);
+        $("#roomDesc").prop("readonly", false);
+
     };
     
     function getProductID(){
@@ -132,8 +137,8 @@
                 type: 'post',
                 url: 'update_room_info.php',
                 data: $('#newInfo').serialize(),
-                success: function () {
-                    console.log("updated");
+                success: function (response) {
+                    console.log(response);
                     $("#beenUpdated").css("visibility", "visible");
 
                 }

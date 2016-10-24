@@ -4,7 +4,6 @@
 
 var container = document.getElementById("blocks");
 var addBlock = document.getElementById("addBlock");
-var removeBlock = document.getElementById("removeBlock");
 var loader = document.getElementById("loadPage");
 var commit = document.getElementById("commit");
 var preview = document.getElementById("preview");
@@ -13,16 +12,19 @@ var count = 0;
 var pageLoaded = false;
 var contentType;
 var product;
-var ArrayInformation = [];
 var colour = "red";
 var hasBeenChanged;
-var currentOrder;
+
+// content arrays
+var ArrayInformation = [];
 var currentArray = [];
+var contentIDArray = [];
+
+
 var expandState = 0;
-var blockID;
 var needUpdating = false;
 
-var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours", "Rates", "Footer"];
+var items = ["Heading", "Sub-Heading", "Paragraph", "Image", "Tours"];
 
 
 addBlock.onclick = function () {
@@ -34,10 +36,10 @@ addBlock.onclick = function () {
 function loadPage(product) {
     $.getJSON("existing_content.php", {name: product}, function (result) {
         $.each(result, function (index, field) {
-            console.log(field);
             if(field !== null) {
                 needUpdating = true;
-                updatePages.UpdateBlock(field,index);
+                contentIDArray.push(field);
+                updatePages.UpdateBlock(field);
             }else{
                 needUpdating = false;
             }
@@ -47,15 +49,15 @@ function loadPage(product) {
 
 
 loader.onclick = function () {
+    ArrayInformation = [];
+    currentArray = [];
+    count = 0;
     if(product !== getProductID()){
-        console.log(product);
         $('.itemBlock').remove();
         ArrayInformation = [];
         pageLoaded = false;
-        product = getProductID();
     }
     product = getProductID();
-    console.log(product);
 
     page.style.visibility = "visible";
     if (pageLoaded === false){
@@ -67,9 +69,7 @@ loader.onclick = function () {
 
 commit.onclick = function () {
     var productsJSON = JSON.stringify(ArrayInformation);
-    // console.log(blockID);
-    console.log(productsJSON);
-
+    console.log(needUpdating);
     if(needUpdating === false) {
         $.ajax({
             url: 'insert_room_info.php',
@@ -124,12 +124,9 @@ $('#removeBlock').click(function () {
         maxArray.push(ArrayInformation[i].content_order);
         console.log(ArrayInformation[i].content_order)
     }
-    var maxNo = Math.max(maxArray);
     ArrayInformation.pop();
-    console.log("max numvber" + maxNo);
     maxArray.pop();
     currentArray.pop();
-    console.log(maxArray);
 
 });
 

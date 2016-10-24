@@ -5,6 +5,7 @@
 function previewPage(jsonObject) {
     var displayorder = [];
     var currentProduct;
+    console.log(jsonObject);
     var displayPage = document.getElementById("page");
     while (displayPage.firstChild) {
         displayPage.removeChild(displayPage.firstChild);
@@ -20,17 +21,20 @@ function previewPage(jsonObject) {
         console.log("current order is: "+displayorder[order]);
 
         if (jsonObject[order].type === 1) {
-               console.log(jsonObject[order].type +" "+ jsonObject[order].content +" "+ jsonObject[order].content_order);
-               isHeading(jsonObject[order].content,jsonObject[order].content_order);
-            }
-            else if (jsonObject[order].type === 2) {
-                isSubHeading(jsonObject[order].content,jsonObject[order].content_order);
-            }
-            else if (jsonObject[order].type === 3) {
-                isParagraph(jsonObject[order].content,jsonObject[order].content_order);
-            }
+            console.log(jsonObject[order].type +" "+ jsonObject[order].content +" "+ jsonObject[order].content_order);
+            isHeading(jsonObject[order].content,jsonObject[order].content_order);
+        }
+        else if (jsonObject[order].type === 2) {
+            isSubHeading(jsonObject[order].content,jsonObject[order].content_order);
+        }
+        else if (jsonObject[order].type === 3) {
+            isParagraph(jsonObject[order].content,jsonObject[order].content_order);
+        }
         else if (jsonObject[order].type === 4) {
             isImage(jsonObject[order].content,jsonObject[order].content_order);
+        }
+        else if (jsonObject[order].type === 5) {
+            isTour(jsonObject[order].content,jsonObject[order].content_order);
         }
     }
 
@@ -72,6 +76,16 @@ function previewPage(jsonObject) {
 
         imgage.innerHTML = '<img src="'+ content+'" width="100%" height="100"> </img>';
         displayPage.insertBefore(imgage, displayPage.children[order]);
+
+    }
+    function isTour(content,order) {
+        var tempcontent = JSON.parse(content);
+        console.log(tempcontent);
+        var tourName = document.createElement('p');
+        tourName.setAttribute('id', "previewsub");
+        tourName.innerHTML = tempcontent.title + " " + tempcontent.url;
+        tourName.innerHTML += '<br><img src="'+ tempcontent.image+'" width="100%" height="100"> </img>';
+        displayPage.insertBefore(tourName, displayPage.children[order]);
 
     }
 

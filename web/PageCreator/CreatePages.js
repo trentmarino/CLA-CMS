@@ -32,11 +32,8 @@ var createPages = {
         container.appendChild(block);
         currentArray.push(count);
         $("#dropdown" + count).click(function () {
-            console.log(count);
-
             BlockSelector(select, block, index);
             expandState += 1;
-
 
         });
         hasBeenChanged = false;
@@ -49,7 +46,6 @@ var createPages = {
 
 function BlockSelector(type, block, index, content) {
 
-    console.log(JSON.stringify(index));
     if (currentArray[index] != index) {
         index = currentArray.indexOf(index);
     }
@@ -63,12 +59,6 @@ function BlockSelector(type, block, index, content) {
         pageElements.ImageObject(block, index, content);
     } else if (type.value === "Tours" || type === 5) {
         pageElements.TourObject(block, index, content);
-
-    } else if (type.value === "Rates" || type === 6) {
-        pageElements.RateObject(block, index, content);
-
-    } else if (type.value === "Footer" || 7) {
-        pageElements.FooterObject(block, index, content);
     }
 
 }

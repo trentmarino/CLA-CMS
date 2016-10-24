@@ -35,7 +35,7 @@ include 'db_connect_production.php';
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="../index.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li class="active"><a href="booking.php">Accept Deposit</a></li>
                 <li><a href="#contact">Logout</a></li>
             </ul>

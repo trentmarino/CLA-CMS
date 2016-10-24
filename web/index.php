@@ -15,7 +15,7 @@
 </head>
 <body>
 <?php
-include 'envronment_test.php';
+include 'environment_test.php';
 
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -34,7 +34,7 @@ include 'envronment_test.php';
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="payment/booking.php">Accept Deposit</a></li>
-                <li><a href="#contact">Logout</a></li>
+                <li><a href="Tours/toursToFile.php">Tours</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -98,6 +98,11 @@ include 'envronment_test.php';
                             number of people:
                         </label>
                         <input class="cmsTextFields" id="noGuests" name="noGuests" type="text">
+                    </li>
+                    <li><label>
+                            Room Description 
+                        </label>
+                        <input class="cmsTextFields" id="roomDesc" name="roomDesc" type="text">
                     </li>
                 </ul>
                 <div class="updateButtons" id="updateButton">

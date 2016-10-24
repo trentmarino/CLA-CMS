@@ -7,7 +7,7 @@
  */
 include "db_connect_production.php";
 $response = array();
-$sql = " SELECT * FROM `customers` WHERE confirmed = 0";
+$sql = " SELECT * FROM `customers`";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

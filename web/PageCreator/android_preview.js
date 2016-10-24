@@ -5,6 +5,7 @@
 function previewPage(jsonObject) {
     var displayorder = [];
     var currentProduct;
+    console.log(jsonObject);
     var displayPage = document.getElementById("page");
     while (displayPage.firstChild) {
         displayPage.removeChild(displayPage.firstChild);
@@ -31,6 +32,9 @@ function previewPage(jsonObject) {
             }
         else if (jsonObject[order].type === 4) {
             isImage(jsonObject[order].content,jsonObject[order].content_order);
+        }
+        else if (jsonObject[order].type === 5) {
+            isTour(jsonObject[order].content,jsonObject[order].content_order);
         }
     }
 
@@ -72,6 +76,15 @@ function previewPage(jsonObject) {
 
         imgage.innerHTML = '<img src="'+ content+'" width="100%" height="100"> </img>';
         displayPage.insertBefore(imgage, displayPage.children[order]);
+
+    }
+    function isTour(content,order) {
+        console.log("Image conent is " + content);
+        var tourName = document.createElement('p');
+        tourName.setAttribute('id', "previewsub");
+        tourName.innerHTML = content.title + " " + content.url;
+        tourName.innerHTML += '<br><img src="'+ content+'" width="100%" height="100"> </img>';
+        displayPage.insertBefore(tourName, displayPage.children[order]);
 
     }
 

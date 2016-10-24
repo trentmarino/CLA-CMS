@@ -1,6 +1,6 @@
 <?php
 
-include "envronment_test.php";
+include "environment_test.php";
 
 if($_SERVER["REQUEST_METHOD"]=="POST") {
     $response = array();

@@ -32,17 +32,14 @@ $.ajax({
             $('.room').css('visibility', "visible");
             $('#roomLabel').css('visibility', "visible");
             selectedProperty = $(this).val();
-            console.log(selectedProperty);
             otherDropDown();
 
         });
 
-        console.log($('.property').val());
         if($('.property').val() == 1){
             $('.room').css('visibility', "visible");
             $('#roomLabel').css('visibility', "visible");
             selectedProperty = $('.property').val();
-            console.log(selectedProperty);
             otherDropDown();
         }
 
@@ -50,7 +47,6 @@ $.ajax({
             $('.room').css('visibility', "visible");
             $('#roomLabel').css('visibility', "visible");
             selectedProperty = $('.property').val();
-            console.log(selectedProperty);
             if (populated === true) {
                 $('.room').find('option').remove();
                 otherDropDown();
@@ -82,13 +78,6 @@ function otherDropDown() {
                     }
                     console.log("this is the product id " +productID);
                     console.log("this is the product id " + podructName);
-                    // $("#roomName").val(value.product_name).prop("readonly", true);
-                    // $("#productid").val(value.idproduct).prop("readonly", true);
-                    // $("#location").val(value.property_name).prop("readonly", true);
-                    // $("#min-rate").val(value.deposit_amount_min).prop("readonly", true);
-                    // $("#max-rate").val(value.deposit_amount_max).prop("readonly", true);
-                    // $("#noGuests").val(value.max_pax).prop("readonly", true);
-                    // populateFields(value);
 
 
                 }

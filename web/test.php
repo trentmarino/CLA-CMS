@@ -5,7 +5,7 @@
  * Date: 18/08/2016
  * Time: 9:27 PM
  */
-include 'envronment_test.php';
+include 'environment_test.php';
 
 ?>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>

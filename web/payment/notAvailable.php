@@ -1,15 +1,14 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <?php
-require_once('../stripe-php-master/init.php');
 require_once('../PHPMailer/PHPMailerAutoload.php');
 require '../emailConfig.php';
 
 $name = $_POST['name'];
 $email = $_POST['email'];
 $bookingID = $_POST['bookingID'];
-$bob = $_POST['notAvailableEmail'];
-echo $bob."jdnfjnf";
+$roomDetails = $_POST['notAvailableEmail'];
+echo $roomDetails."details";
 
     $message = '
 <div style="margin-left:17.5%;" class="confirmationEmail">
@@ -19,7 +18,7 @@ Hello ' . $name . '
 Unfortunately the room you selected was unavailable. However, the following rooms are available:
 </p>
 <p>
-' . $bob . '
+' . $roomDetails . '
 </p>
 <p>
 Please enjoy your stay.
